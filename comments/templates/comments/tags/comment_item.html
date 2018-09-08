@@ -1,0 +1,34 @@
+{% load blog_tags %}
+<li class="depth-{{ depth }}" style="width: 100%" id="comment-{{ comment_item.pk }}">
+    <div class="comments">
+
+        <div class="avatar">
+            {% if gravatar_url %}
+                <img src="{{ comment_item.author.email|gravatar_url:150 }}"
+                     srcset="{{ comment_item.author.email|gravatar_url:150 }}"
+                     class="avatar avatar-96 photo" height="96" width="96" alt="">
+            {% else %}
+                <img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=50"
+                     alt="" border="0"/>
+            {% endif %}
+        </div>
+
+        <div class="comment-des"  id="div-comment-{{ comment_item.pk }}" >
+            <div class="comment-by">
+                <strong>{{ comment_item.author.username }}</strong>
+                <span class="reply">
+                    <span style="color:#aaa">/ </span>
+                    <a rel="nofollow" href="javascript:void(0)"
+                       onclick="do_reply({{ comment_item.pk }})"
+                       aria-label="回复给{{ comment_item.author.username }}">
+                        回复
+                    </a>
+                </span>
+                <span class="date">{{ comment_item.created_time }}</span>
+            </div>
+            <p>{{ comment_item.body |escape|custom_markdown }}</p>
+        </div>
+
+    </div>
+
+</li>

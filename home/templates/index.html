@@ -1,0 +1,149 @@
+﻿{% extends 'share_layout/base_layout.html' %}
+
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Tagline -->
+        <div class="sixteen columns">
+            <div id="tagline" class="header-text" style="">
+                {{ home.slogan|custom_markdown }}
+            </div>
+        </div>
+
+        <!-- Slider -->
+        <div class="sixteen columns">
+            <div class="flexslider home">
+                <ul class="slides">
+                    {% for c in home.homecarousel_set.all %}
+                        <li>
+                            <img src="{{ c.image.url }}" alt="" />
+{#                            <div class="slider-caption">#}
+{#                                <h3>{{ c.title }}</h3>#}
+{#                                {{ c.description|custom_markdown }}#}
+{#                            </div>#}
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="sixteen columns" id="divider"></div>
+
+        {% for s in home.homesuperiority_set.all %}
+            <!-- 1/3 Columns -->
+            <div class="one-third column">
+                <div class="feature">
+                    <div class="feature-circle green">{{ forloop.counter }}</div>
+                    <div class="feature-description">
+                        <h4>{{ s.title }}</h4>
+                        {{ s.description|custom_markdown }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- End Features -->
+    </div>
+    <!-- End 960 Container -->
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <div class="sixteen columns"><h2 class="related-title"><span>最近案例</span></h2></div>
+
+        {% for p in recent_projects %}
+            <!-- 1/4 Column -->
+            <div class="four columns portfolio-item interior-design real-estate {{ p.service.name }}">
+                <div class="item-img">
+                    <a href="{{ p.get_absolute_url }}">
+                        <img src="{{ p.thumb.url }}" style="width:268px;max-width: 268px;height:178px;max-height:178px;"
+                             alt=""/>
+                        <div class="overlay link"></div>
+                    </a>
+                </div>
+                <div class="portfolio-item-meta">
+                    <h4><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></h4>
+                    {{ p.description|custom_markdown }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- End 960 Container -->
+
+
+    <!-- 960 Container -->
+    <div class="container ">
+
+        <div class="twelve columns">
+
+            <!-- Title -->
+            <h2 class="related-title"><span>最近文章</span></h2>
+
+            <div class="four columns" style="width: 260px;">
+                <ul class="check_list">
+                    {% for l in latest_blogs1 %}
+                        <li><a href="{{ l.get_absolute_url }}">{{ l.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="four columns" style="width: 260px;">
+                <ul class="check_list">
+                    {% for l in latest_blogs2 %}
+                        <li><a href="{{ l.get_absolute_url }}">{{ l.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="four columns" style="width: 260px;">
+                <ul class="check_list">
+                    {% for l in latest_blogs3 %}
+                        <li><a href="{{ l.get_absolute_url }}">{{ l.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Testimonials - 1/4 Columns -->
+        <div class="four columns">
+            <h2 class="related-title"><span>标语</span></h2>
+
+            <!-- Testimonials Carousel -->
+            <div class="testimonials-carousel">
+                <ul class="carousel" style="list-style:none;">
+                    <li class="testimonial">
+                        <div class="testimonials">
+                            人一定有自信的勇气才会有创造的勇气。
+                        </div>
+                        <div class="testimonials_bg"></div>
+                        <div class="testimonials_author"><span>鲁迅</span></div>
+                    </li>
+                    <li class="testimonial">
+                        <div class="testimonials">
+                            人生重要的不是所站的位置，而是所朝的方向。
+                        </div>
+                        <div class="testimonials_bg"></div>
+                        <div class="testimonials_author"><span>李嘉诚</span></div>
+                    </li>
+                    <li class="testimonial">
+                        <div class="testimonials">
+                            唯一能持久的竞争优势是胜过竞争对手的学习能力。
+                        </div>
+                        <div class="testimonials_bg"></div>
+                        <div class="testimonials_author"><span>盖亚斯</span></div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /End 960 Container -->
+
+{% endblock %}

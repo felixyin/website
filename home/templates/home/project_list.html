@@ -1,0 +1,66 @@
+﻿{% extends 'share_layout/base_layout.html' %}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+
+     <!-- Page Subtitle -->
+    <div id="subtitle" style="height: 60px!important;">
+        <!-- 960 Container -->
+        <div class="container" style="height: 60px!important;">
+
+            <div class="sixteen columns" style="height: 60px!important;padding-top: 15px;">
+                <a href="{% url 'home:project-list' %}" style="font-size: 18px!important;margin-top:14px;height: 60px!important;">案例展示</a>
+            </div>
+        </div>
+        <!-- End 960 Container -->
+    </div><!-- End Page Subtitle -->
+
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Portfolio Filter -->
+        <div class="sixteen columns">
+
+            <div id="filters">
+                <ul class="option-set" data-option-key="filter">
+                    <li><a href="#" class="selected" data-option-value="All">全部</a></li>
+                    {% for s in services %}
+                        <li><a href="#" data-option-value="{{ s.name }}">{{ s.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div><!-- End Portfolio Filter-->
+
+    </div>
+    <!-- End 960 Container -->
+
+    <!-- 960 Container -->
+    <div class="container">
+        <!-- Portfolio Content -->
+        <div id="portfolio-wrapper">
+
+            {% for p in project_list %}
+                <!-- 1/4 Column -->
+                <div class="four columns portfolio-item interior-design real-estate " data-service-name="{{ p.service.name }}">
+                    <div class="item-img">
+                        <a href="{{ p.get_absolute_url }}">
+                            <img src="{{ p.thumb.url }}" style="width:268px;max-width: 268px;height:178px;max-height:178px;"
+                                 alt=""/>
+                            <div class="overlay link"></div>
+                        </a>
+                    </div>
+                    <div class="portfolio-item-meta">
+                        <h4><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></h4>
+                        {{ p.description|custom_markdown }}
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <!-- End Portfolio Content -->
+    </div>
+    <!-- End 960 Container -->
+
+{% endblock %}

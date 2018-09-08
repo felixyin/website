@@ -1,0 +1,178 @@
+﻿{% extends 'share_layout/base_layout.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block content %}
+
+    <!-- Page Subtitle -->
+    <div id="subtitle">
+
+        <!-- 960 Container -->
+        <div class="container">
+            <div class="sixteen columns">
+                <h3>关于我们</h3>
+            </div>
+        </div>
+        <!-- End 960 Container -->
+
+    </div><!-- End Page Subtitle -->
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Text -->
+        <div class="sixteen columns">
+            <h3 class="page_headline">我们具有什么优势 ？</h3>
+            {{ about.introduce| custom_markdown }}
+        </div>
+
+        <!-- Headline -->
+        <div class="sixteen columns"><h3 class="page_headline">团队介绍</h3></div>
+
+        {% for tm in about.teammember_set.all %}
+            <!-- About Team -->
+            <div class="three columns"><img class="team_img" src="{{ tm.picture.url }}" alt=""/></div>
+            <div class="five columns">
+                <div class="team">
+                    <h4>{{ tm.name }}</h4>
+                    <span>{{ tm.job }}</span>
+                    {{ tm.introduce|custom_markdown }}
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- Text -->
+        <div class="sixteen columns">
+            <h3 class="page_headline">客户评价</h3>
+        </div>
+
+        {% for tm in about.testimonials_set.all %}
+            {% if forloop.counter0|custom_mod:2 == 0 %}
+                <div class="sixteen columns">
+                    <div class="testimonial_page">
+                        <div class="testimonials">
+                            {{ tm.content | custom_markdown }}
+                        </div>
+                        <div class="testimonials_bg"></div>
+                        <div class="testimonials_author_page">{{ tm.author }}</div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="sixteen columns">
+                    <div class="testimonial_page">
+                        <blockquote>
+                            {{ tm.content | custom_markdown }}
+                            <p><h6 style="font-weight:500;">{{ tm.author }}</h6></p>
+                        </blockquote>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Headline -->
+        <div class="sixteen columns"><h3 class="page_headline" style="margin-top: -10px;">我们的客户</h3></div>
+        <!-- Client Logo -->
+        {% for oc in about.ourclient_set.all %}
+            <div class="four columns">
+                <div class="clients" style="padding: 10px 0 ;">
+                    <a href="{{ oc.url }}" target="_blank">
+                        <img src="{{ oc.logo.url }}" style="margin:0 auto;max-height: 110px;" alt=""/>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+
+
+        <!-- Google Map -->
+        <div class="sixteen columns">
+            <h3 class="page_headline">联系地址</h3>
+            <div id="google_map" class="embed">
+                <iframe width="640" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                        src="{% static 'home/map.html' %}"></iframe>
+            </div>
+        </div><!-- End Google Map-->
+
+        <!-- Contact Form -->
+        <div class="twelve columns">
+            <h3 class="page_headline">留言信箱</h3>
+
+            <div class="page_content">
+                <div class="contact_form">
+
+                    <form action="http://vasterad.com/themes/sensation/contact-form.php" id="page-contact"
+                          method="post">
+                        <span class="no_error">jksljkl</span>
+
+                        <div>
+                            <label for="name" style="margin-top: 0">姓名:</label>
+                            <input type="text" name="name" id="name" class="contact_text" size="40" maxlength="60"
+                                   value=""/>
+                        </div>
+
+                        <div>
+                            <label for="email">邮箱: <span>*</span></label>
+                            <input type="text" name="email" id="email" class="contact_text validate['required','email']"
+                                   size="40" maxlength="60" value=""/>
+                        </div>
+
+                        <div>
+                            <label for="message">留言: <span>*</span></label>
+                            <textarea name="message" id="message"
+                                      class="contact_textarea validate['required']"></textarea>
+                        </div>
+
+                        <div class="send_button">
+                            <input class="contact_submit" type="submit" name="contact_send" id="contact_send"
+                                   value="发送"/>
+                            <input type="hidden" name="action" value="send"/>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div><!-- End Contact Form-->
+
+        <!-- Contact Details -->
+        <div class="four columns">
+            <h3 class="page_headline">联系方式</h3>
+            <div class="address_contact">
+                <img style="padding-top: 1px" src="{% static 'images/address_contact.png' %}" alt=""/>
+                <strong>地址:</strong>
+                {{ about.address }}
+            </div>
+            <div class="address_contact">
+                <img style="padding-top: 1px" src="{% static 'images/phone_contact.png' %}" alt=""/>
+                <strong>电话:</strong>
+                {{ about.phone }}
+            </div>
+            <div class="address_contact">
+                <img style="padding-top: 3px" src="{% static 'images/mail_contact.png' %}" alt=""/>
+                <strong>邮箱:</strong>
+                <a href="#">{{ about.email }} </a>
+            </div>
+            <div class="address_contact">
+                <img style="padding-top: 3px" src="{% static 'images/mail_contact.png' %}" alt=""/>
+                <strong>GitHub:</strong>
+                <a href="#">{{ about.github }} </a>
+            </div>
+            <div class="address_contact">
+                <img style="padding-top: 3px" src="{% static 'images/mail_contact.png' %}" alt=""/>
+                <strong>微信:</strong>
+                <a href="#">{{ about.wechat }} </a>
+            </div>
+            <div class="address_contact">
+                <img style="padding-top: 3px" src="{% static 'images/mail_contact.png' %}" alt=""/>
+                <strong>QQ:</strong>
+                <a href="#">{{ about.qq }} </a>
+                <br/><br/>
+            </div>
+
+
+        </div><!-- End Contact Details -->
+
+    </div>
+    <!-- End 960 Container -->
+
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% load blog_tags %}
+
+<div class="post-meta">
+
+    {% if article.pub_time %}
+        <span class="myicon iconfont icon-time"></span>
+        {#    <a href="{{ article.get_absolute_url }}" title="{% datetimeformat article.pub_time %}"#}
+        {#       itemprop="datePublished" content="{% datetimeformat article.pub_time %}" rel="bookmark">#}
+        {% datetimeformat article.pub_time %}
+        {#    </a>#}
+    {% endif %}
+
+    {% if article.author.nickname %}
+        <span class="myicon iconfont icon-user"></span>{{ article.author.nickname }}
+    {% endif %}
+
+    {% if article.views %}
+        <span class="myicon iconfont icon-view"></span>{{ article.views }}
+    {% endif %}
+
+    {% if article.type == 'a' %}
+        <span class="myicon iconfont icon-tubiao113"></span>
+        <a href="{{ article.category.get_absolute_url }}" rel="category tag">{{ article.category.name }}</a>
+        {% if article.tags.all %}
+            <span class="myicon iconfont icon-tag"></span>
+            {% for t in article.tags.all %}
+                <a href="{{ t.get_absolute_url }}" rel="tag">{{ t.name }}</a>
+                {% if t != article.tags.all.last %},{% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
+    {% if article.comment_status == "o" and open_site_comment %}
+        <span class="myicon iconfont icon-comment"></span>
+        <a href="{{ article.get_absolute_url }}#comments"
+           class="ds-thread-count" data-thread-key="3815" rel="nofollow">
+            {% if article.comment_set and article.comment_set.count %}
+                {{ article.comment_set.count }}个评论
+            {% else %}
+                发表评论
+            {% endif %}
+        </a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <a href="{{ article.get_admin_url }}" target="_blank">编辑</a>
+    {% endif %}
+
+</div>

@@ -1,0 +1,46 @@
+<!-- Form -->
+<div class="comments-sec" id="respond">
+
+    <form action="{% url 'comments:postcomment' article.pk %}" style="margin-top: 50px;margin-bottom: 50px;"
+          method="post" id="commentform" class="comment-form" onsubmit="return saveToLocal()">
+        <h3>发表评论</h3>
+        {% csrf_token %}
+        <div class="form_comment" id="comments">
+            <div>
+                {% if not form.name.is_hidden %}
+                    {{ form.name.label_tag }}
+                {% endif %}
+                {{ form.name }}
+                {{ form.name.errors }}
+            </div>
+
+            <div>
+                {% if not form.email.is_hidden %}
+                    {{ form.email.label_tag }}
+                {% endif %}
+                {{ form.email }}
+                {{ form.email.errors }}
+            </div>
+
+            <div>
+                {{ form.body.label_tag }}
+                {{ form.body }}
+                {{ form.body.errors }}
+            </div>
+        </div>
+
+        {{ form.parent_comment_id }}
+
+        <div class="form_send">
+            <span class="comment-markdown"> 支持markdown</span>
+            <input name="submit" type="submit" id="submit" class="submit" value="发表评论"/>
+            <small class="cancel-comment" id="cancel_comment" style="display: none">
+                <a href="javascript:void(0)" id="cancel-comment-reply-link" onclick="cancel_reply()">取消回复</a>
+            </small>
+        </div>
+    </form>
+
+</div>
+
+<!-- End Form -->
+

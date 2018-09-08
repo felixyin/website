@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>WOLF OMS订单管理系统</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({"extensions":["tex2jax.js"],"jax":["input/TeX","output/HTML-CSS"],"messageStyle":"none","tex2jax":{"processEnvironments":false,"processEscapes":true,"inlineMath":[["$","$"],["\\(","\\)"]],"displayMath":[["$$","$$"],["\\[","\\]"]]},"TeX":{"extensions":["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]},"HTML-CSS":{"availableFonts":["TeX"]}});
+        </script>
+        <script type="text/javascript" async src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js"></script>
+        
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.0.0/mermaid.min.css">
+
+      
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.0.0/mermaid.min.js"></script>
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none} 
+       
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="wolf-oms&#x8BA2;&#x5355;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;-&#x9700;&#x6C42;&#x548C;&#x62A5;&#x4EF7;">WOLF OMS订单管理系统-需求和报价</h1>
+
+<h2 class="mume-header" id="&#x4E00;-&#x9700;&#x6C42;&#x6982;&#x8FF0;">一、需求概述</h2>
+
+<p><strong>背景</strong> 通过实现线上管理客户信息、订单信息、整机和配件信息，以及设计相关操作流程，使得公司业务更加流程化、规范化，提高业务执行效率。</p>
+<p>主要业务流程有：</p>
+<ul>
+<li>订单管理</li>
+<li>配件订单管理</li>
+<li>配件三包管理</li>
+<li>配件基础数据管理</li>
+<li>客户管理</li>
+<li>工资核算</li>
+<li>统计报表</li>
+</ul>
+<blockquote>
+<p>除此之外，辅助的菜单还有：</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>用户管理（操作系统的用户）</li>
+<li>菜单管理（开发人员配置菜单分类、地址和按钮权限标示）</li>
+<li>机构管理（配置上下层级，用于查看数据的时候数据权限的控制）</li>
+<li>字典管理（用于配置可以枚举的一些数据，比如下拉框中显示的数据）</li>
+<li>角色管理（用于配置系统角色、角色关联菜单权限、关联人员）</li>
+<li>附件管理（系统所有附件，可在此模块中搜索和管理、上传）</li>
+<li>通知通告 (一个可以站内发送消息的单独模块)</li>
+<li>流程管理 (管理系统工作流模型，可以可视化的调整工作流程和相关参数)</li>
+</ul>
+</blockquote>
+<p>需开发的软件：</p>
+<ul>
+<li>BS架构的管理系统</li>
+<li>审批和管理端的手机APP（android、ios）</li>
+</ul>
+<h2 class="mume-header" id="&#x4E8C;-&#x7528;&#x4F8B;&#x5206;&#x6790;">二、用例分析</h2>
+
+<p>整个系统总共有三个角色，其用例如下：</p>
+<ol>
+<li></li>
+</ol>
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="265px" preserveAspectRatio="none" style="width:597px;height:265px;" version="1.1" viewBox="0 0 597 265" width="597px" zoomAndPan="magnify"><defs><filter height="300%" id="fr11ikuhirkbd" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><!--entity User--><ellipse cx="184" cy="91.4883" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"></ellipse><path d="M184,99.4883 L184,126.4883 M171,107.4883 L197,107.4883 M184,126.4883 L171,141.4883 M184,126.4883 L197,141.4883 " fill="#FEFECE" filter="url(#fr11ikuhirkbd)" style="stroke: #A80036; stroke-width: 2.0;"></path><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="31" x="168.5" y="162.0234">User</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="84" x="142" y="78.5352">«业务员角色»</text><ellipse cx="20.9246" cy="240.0397" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="14.9246" ry="12.5397" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="12" x="14.9246" y="244.7838">...</text><ellipse cx="114.098" cy="240.159" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="86.098" y="244.9031">提成查看</text><ellipse cx="253.8485" cy="239.7697" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="61.8485" ry="14.7697" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="211.8485" y="244.5138">配件订单管理</text><ellipse cx="412.8485" cy="239.7697" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="61.8485" ry="14.7697" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="370.8485" y="244.5138">配件三包管理</text><ellipse cx="544.098" cy="115.159" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="516.098" y="119.9031">客户管理</text><ellipse cx="424.098" cy="115.159" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="396.098" y="119.9031">代办任务</text><ellipse cx="304.098" cy="115.159" fill="#FEFECE" filter="url(#fr11ikuhirkbd)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="276.098" y="119.9031">订单管理</text><!--link User to ...--><path d="M141.5992,147.516 C107.1442,173.9385 60.4709,209.7309 36.5486,228.0762 " fill="none" id="User-..." style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="32.3546,231.2925,41.9305,228.9897,36.3222,228.2498,37.0621,222.6415,32.3546,231.2925" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 提成查看--><path d="M155.9317,165.122 C144.8322,184.9425 132.7639,206.493 124.4367,221.3631 " fill="none" id="User-&#x63D0;&#x6210;&#x67E5;&#x770B;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="121.9777,225.7541,129.8653,219.8562,124.4209,221.3916,122.8854,215.9472,121.9777,225.7541" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 配件订单管理--><path d="M212.0683,165.122 C222.961,184.5731 234.7867,205.6905 243.094,220.5249 " fill="none" id="User-&#x914D;&#x4EF6;&#x8BA2;&#x5355;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="245.5542,224.9182,244.6469,215.1112,243.1112,220.5557,237.6668,219.02,245.5542,224.9182" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 配件三包管理--><path d="M226.1715,152.5573 C231.9809,157.004 238.0119,161.2773 244,165 C285.4434,190.7644 337.2626,212.3775 372.5196,225.6839 " fill="none" id="User-&#x914D;&#x4EF6;&#x4E09;&#x5305;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="377.598,227.5863,370.5732,220.6832,372.9158,225.8323,367.7667,228.1748,377.598,227.5863" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 客户管理--><path d="M220.8793,64.5994 C232.4159,52.6423 246.1867,41.4858 261.5,35 C345.3963,-0.5336 382.6037,-0.5336 466.5,35 C495.8008,47.4101 519.4545,76.9205 532.6144,96.4197 " fill="none" id="User-&#x5BA2;&#x6237;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="535.4181,100.6604,533.7912,90.9468,532.6605,96.4896,527.1178,95.3589,535.4181,100.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 代办任务--><path d="M220.8793,64.5994 C232.4159,52.6423 246.1867,41.4858 261.5,35 C296.2863,20.2666 311.7137,20.2666 346.5,35 C375.8008,47.4101 399.4545,76.9205 412.6144,96.4197 " fill="none" id="User-&#x4EE3;&#x529E;&#x4EFB;&#x52A1;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="415.4181,100.6604,413.7912,90.9468,412.6605,96.4896,407.1178,95.3589,415.4181,100.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 订单管理--><path d="M226.1875,115 C236.1959,115 246.2042,115 256.2126,115 " fill="none" id="User-&#x8BA2;&#x5355;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="261.4463,115,252.4463,111,256.4463,115,252.4463,119,261.4463,115" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--
+@startuml
+User <<业务员角色>>
+User - -> (...)
+User - -> (提成查看)
+User - -> (配件订单管理)
+User - -> (配件三包管理)
+User -> (客户管理)
+User -> (代办任务)
+User -> (订单管理)
+@enduml
+
+PlantUML version 1.2017.15(Tue Jul 04 00:45:34 CST 2017)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_111-b14
+Operating System: Mac OS X
+OS Version: 10.12.6
+Default Encoding: US-ASCII
+Language: en
+Country: US
+--></g></svg></p>
+<ol start="2">
+<li></li>
+</ol>
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="178px" preserveAspectRatio="none" style="width:406px;height:178px;" version="1.1" viewBox="0 0 406 178" width="406px" zoomAndPan="magnify"><defs><filter height="300%" id="f1nnzh023qgaia" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><!--entity User--><ellipse cx="48" cy="94.4883" fill="#FEFECE" filter="url(#f1nnzh023qgaia)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"></ellipse><path d="M48,102.4883 L48,129.4883 M35,110.4883 L61,110.4883 M48,129.4883 L35,144.4883 M48,129.4883 L61,144.4883 " fill="#FEFECE" filter="url(#f1nnzh023qgaia)" style="stroke: #A80036; stroke-width: 2.0;"></path><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="31" x="32.5" y="165.0234">User</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="84" x="6" y="81.5352">«操作员角色»</text><ellipse cx="380.9246" cy="118.0397" fill="#FEFECE" filter="url(#f1nnzh023qgaia)" rx="14.9246" ry="12.5397" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="12" x="374.9246" y="122.7838">...</text><ellipse cx="288.098" cy="118.159" fill="#FEFECE" filter="url(#f1nnzh023qgaia)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="260.098" y="122.9031">待办任务</text><ellipse cx="168.098" cy="118.159" fill="#FEFECE" filter="url(#f1nnzh023qgaia)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="140.098" y="122.9031">订单管理</text><!--link User to ...--><path d="M84.8793,67.5994 C96.4159,55.6423 110.1867,44.4858 125.5,38 C209.3963,2.4664 250.7116,-5.9891 330.5,38 C354.5597,51.2647 368.7385,81.3505 375.6767,100.6119 " fill="none" id="User-..." style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="377.4438,105.7346,378.2901,95.9222,375.8132,101.0079,370.7275,98.5311,377.4438,105.7346" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 待办任务--><path d="M84.8793,67.5994 C96.4159,55.6423 110.1867,44.4858 125.5,38 C160.2863,23.2666 175.7137,23.2666 210.5,38 C239.8008,50.4101 263.4545,79.9205 276.6144,99.4197 " fill="none" id="User-&#x5F85;&#x529E;&#x4EFB;&#x52A1;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="279.4181,103.6604,277.7912,93.9468,276.6605,99.4896,271.1178,98.3589,279.4181,103.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 订单管理--><path d="M90.1875,118 C100.1959,118 110.2042,118 120.2126,118 " fill="none" id="User-&#x8BA2;&#x5355;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="125.4463,118,116.4463,114,120.4463,118,116.4463,122,125.4463,118" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--
+@startuml
+User <<操作员角色>>
+User -> (...)
+User -> (待办任务)
+User -> (订单管理)
+@enduml
+
+PlantUML version 1.2017.15(Tue Jul 04 00:45:34 CST 2017)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_111-b14
+Operating System: Mac OS X
+OS Version: 10.12.6
+Default Encoding: US-ASCII
+Language: en
+Country: US
+--></g></svg></p>
+<ol start="3">
+<li></li>
+</ol>
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="175px" preserveAspectRatio="none" style="width:512px;height:175px;" version="1.1" viewBox="0 0 512 175" width="512px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ed8hw2jnrkhg" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><!--entity User--><ellipse cx="41" cy="91.4883" fill="#FEFECE" filter="url(#f1ed8hw2jnrkhg)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"></ellipse><path d="M41,99.4883 L41,126.4883 M28,107.4883 L54,107.4883 M41,126.4883 L28,141.4883 M41,126.4883 L54,141.4883 " fill="#FEFECE" filter="url(#f1ed8hw2jnrkhg)" style="stroke: #A80036; stroke-width: 2.0;"></path><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="31" x="25.5" y="162.0234">User</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="70" x="6" y="78.5352">«会计角色»</text><ellipse cx="486.9246" cy="115.0397" fill="#FEFECE" filter="url(#f1ed8hw2jnrkhg)" rx="14.9246" ry="12.5397" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="12" x="480.9246" y="119.7838">...</text><ellipse cx="394.098" cy="115.159" fill="#FEFECE" filter="url(#f1ed8hw2jnrkhg)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="366.098" y="119.9031">工资核算</text><ellipse cx="274.098" cy="115.159" fill="#FEFECE" filter="url(#f1ed8hw2jnrkhg)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="246.098" y="119.9031">待办任务</text><ellipse cx="154.098" cy="115.159" fill="#FEFECE" filter="url(#f1ed8hw2jnrkhg)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="126.098" y="119.9031">订单管理</text><!--link User to ...--><path d="M73.7819,64.6884 C84.2734,52.7316 96.9905,41.5531 111.5,35 C177.3205,5.2727 373.2531,0.1306 436.5,35 C460.5597,48.2647 474.7385,78.3505 481.6767,97.6119 " fill="none" id="User-..." style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="483.4438,102.7346,484.2901,92.9222,481.8132,98.0079,476.7275,95.5311,483.4438,102.7346" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 工资核算--><path d="M73.7819,64.6884 C84.2734,52.7316 96.9905,41.5531 111.5,35 C194.5351,-2.5021 232.6037,-0.5336 316.5,35 C345.8008,47.4101 369.4545,76.9205 382.6144,96.4197 " fill="none" id="User-&#x5DE5;&#x8D44;&#x6838;&#x7B97;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="385.4181,100.6604,383.7912,90.9468,382.6605,96.4896,377.1178,95.3589,385.4181,100.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 待办任务--><path d="M73.7819,64.6884 C84.2734,52.7316 96.9905,41.5531 111.5,35 C145.9292,19.4503 161.7137,20.2666 196.5,35 C225.8008,47.4101 249.4545,76.9205 262.6144,96.4197 " fill="none" id="User-&#x5F85;&#x529E;&#x4EFB;&#x52A1;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="265.4181,100.6604,263.7912,90.9468,262.6605,96.4896,257.1178,95.3589,265.4181,100.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 订单管理--><path d="M76.3125,115 C86.2186,115 96.1248,115 106.0309,115 " fill="none" id="User-&#x8BA2;&#x5355;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="111.2112,115,102.2112,111,106.2112,115,102.2112,119,111.2112,115" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--
+@startuml
+User <<会计角色>>
+User -> (...)
+User -> (工资核算)
+User -> (待办任务)
+User -> (订单管理)
+@enduml
+
+PlantUML version 1.2017.15(Tue Jul 04 00:45:34 CST 2017)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_111-b14
+Operating System: Mac OS X
+OS Version: 10.12.6
+Default Encoding: US-ASCII
+Language: en
+Country: US
+--></g></svg></p>
+<ol start="4">
+<li></li>
+</ol>
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="269px" preserveAspectRatio="none" style="width:786px;height:269px;" version="1.1" viewBox="0 0 786 269" width="786px" zoomAndPan="magnify"><defs><filter height="300%" id="f1pe2aowkjl0qi" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><!--entity User--><ellipse cx="333" cy="91.4883" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 2.0;"></ellipse><path d="M333,99.4883 L333,126.4883 M320,107.4883 L346,107.4883 M333,126.4883 L320,141.4883 M333,126.4883 L346,141.4883 " fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" style="stroke: #A80036; stroke-width: 2.0;"></path><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="31" x="317.5" y="162.0234">User</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="70" x="298" y="78.5352">«管理角色»</text><ellipse cx="20.9246" cy="242.0397" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="14.9246" ry="12.5397" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="12" x="14.9246" y="246.7838">...</text><ellipse cx="114.098" cy="242.159" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="86.098" y="246.9031">订单管理</text><ellipse cx="253.8485" cy="241.7697" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="61.8485" ry="14.7697" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="211.8485" y="246.5138">配件订单管理</text><ellipse cx="412.8485" cy="241.7697" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="61.8485" ry="14.7697" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="84" x="370.8485" y="246.5138">配件三包管理</text><ellipse cx="583.0352" cy="241.907" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="72.5352" ry="16.907" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="112" x="527.0352" y="246.6512">配件基础数据管理</text><ellipse cx="733.098" cy="242.159" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="705.098" y="246.9031">客户管理</text><ellipse cx="686.098" cy="115.159" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="658.098" y="119.9031">工资核算</text><ellipse cx="566.098" cy="115.159" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="538.098" y="119.9031">待办任务</text><ellipse cx="446.098" cy="115.159" fill="#FEFECE" filter="url(#f1pe2aowkjl0qi)" rx="42.598" ry="14.659" style="stroke: #A80036; stroke-width: 1.5;"></ellipse><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="56" x="418.098" y="119.9031">统计报表</text><!--link User to ...--><path d="M297.7345,127.6122 C244.3367,146.9978 140.0691,185.9819 54,225 C48.787,227.3633 43.2192,230.1328 38.1703,232.7424 " fill="none" id="User-..." style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="33.7045,235.0776,43.5334,234.4516,38.1352,232.7606,39.8262,227.3624,33.7045,235.0776" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 订单管理--><path d="M297.8139,135.4047 C253.895,160.8737 179.7769,203.8554 140.4135,226.6826 " fill="none" id="User-&#x8BA2;&#x5355;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="135.7898,229.3639,145.582,228.3093,140.1152,226.8557,141.5688,221.3888,135.7898,229.3639" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 配件订单管理--><path d="M301.7771,165.1938 C289.2698,185.3004 275.6033,207.2707 266.1032,222.5429 " fill="none" id="User-&#x914D;&#x4EF6;&#x8BA2;&#x5355;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="263.2946,227.058,271.445,221.5289,265.9357,222.8125,264.6522,217.3032,263.2946,227.058" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 配件三包管理--><path d="M364.6181,165.1938 C377.2837,185.3004 391.1233,207.2707 400.7436,222.5429 " fill="none" id="User-&#x914D;&#x4EF6;&#x4E09;&#x5305;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="403.5877,227.058,402.1753,217.3109,400.9228,222.8274,395.4063,221.5748,403.5877,227.058" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 配件基础数据管理--><path d="M368.2441,151.6752 C373.9014,156.5245 379.908,161.1428 386,165 C431.4652,193.7866 489.4318,214.8477 530.6893,227.5952 " fill="none" id="User-&#x914D;&#x4EF6;&#x57FA;&#x7840;&#x6570;&#x636E;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="535.6359,229.1085,528.2,222.6504,530.8547,227.6457,525.8594,230.3004,535.6359,229.1085" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 客户管理--><path d="M368.0031,152.8656 C373.6522,157.4845 379.7205,161.7214 386,165 C501.5157,225.3129 546.4558,193.8858 673,225 C680.3464,226.8063 688.1524,228.8931 695.6199,230.9726 " fill="none" id="User-&#x5BA2;&#x6237;&#x7BA1;&#x7406;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="700.7259,232.4076,693.144,226.1215,695.9124,231.0546,690.9793,233.823,700.7259,232.4076" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 工资核算--><path d="M365.7819,64.6884 C376.2734,52.7316 388.9905,41.5531 403.5,35 C486.5351,-2.5021 524.6037,-0.5336 608.5,35 C637.8008,47.4101 661.4545,76.9205 674.6144,96.4197 " fill="none" id="User-&#x5DE5;&#x8D44;&#x6838;&#x7B97;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="677.4181,100.6604,675.7912,90.9468,674.6605,96.4896,669.1178,95.3589,677.4181,100.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 待办任务--><path d="M365.7819,64.6884 C376.2734,52.7316 388.9905,41.5531 403.5,35 C437.9292,19.4503 453.7137,20.2666 488.5,35 C517.8008,47.4101 541.4545,76.9205 554.6144,96.4197 " fill="none" id="User-&#x5F85;&#x529E;&#x4EFB;&#x52A1;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="557.4181,100.6604,555.7912,90.9468,554.6605,96.4896,549.1178,95.3589,557.4181,100.6604" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--link User to 统计报表--><path d="M368.3125,115 C378.2186,115 388.1248,115 398.0309,115 " fill="none" id="User-&#x7EDF;&#x8BA1;&#x62A5;&#x8868;" style="stroke: #A80036; stroke-width: 1.0;"></path><polygon fill="#A80036" points="403.2112,115,394.2112,111,398.2112,115,394.2112,119,403.2112,115" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--
+@startuml
+User <<管理角色>>
+User - -> (...)
+User - -> (订单管理)
+User - -> (配件订单管理)
+User - -> (配件三包管理)
+User - -> (配件基础数据管理)
+User - -> (客户管理)
+User -> (工资核算)
+User -> (待办任务)
+User -> (统计报表)
+@enduml
+
+PlantUML version 1.2017.15(Tue Jul 04 00:45:34 CST 2017)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_111-b14
+Operating System: Mac OS X
+OS Version: 10.12.6
+Default Encoding: US-ASCII
+Language: en
+Country: US
+--></g></svg></p>
+<h2 class="mume-header" id="&#x4E09;-&#x670D;&#x52A1;&#x5668;&#x67B6;&#x6784;&#x5206;&#x6790;">三、服务器架构分析</h2>
+
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fizjcb97p3j31ch0gzjss.jpg" alt=""></p>
+<ol>
+<li>WEB应用服务器虚拟出的服务器有：</li>
+</ol>
+<ul>
+<li>Nginx负载均衡服务器 1台</li>
+<li>Web容器 2台</li>
+<li>Redis 缓存服务器 1台</li>
+</ul>
+<ol start="2">
+<li>数据库服务器虚拟出的服务器有：</li>
+</ol>
+<ul>
+<li>Master 主数据库 一台</li>
+<li>Slave 从数据库 一台</li>
+</ul>
+<blockquote>
+<p>此架构可在尽可能少支持服务器成本的前提下提高系统的健壮性和安全性。</p>
+</blockquote>
+<h2 class="mume-header" id="&#x56DB;-&#x4E3B;&#x8981;&#x4E1A;&#x52A1;&#x6D41;&#x7A0B;&#x5206;&#x6790;">四、主要业务流程分析</h2>
+
+<h3 class="mume-header" id="1-&#x9500;&#x552E;&#x8BA2;&#x5355;&#x6D41;&#x7A0B;">1、销售订单流程</h3>
+
+<div class="mermaid">sequenceDiagram
+    participant 业务员
+    participant 操作员
+    participant 会计
+    participant 管理员
+    Note over 业务员: 新建订单：PI、客户名称、国家、资料、产品简要生产计划、贸易形式、付款形式、客户来源等
+    业务员->>操作员: 新建订单
+    Note over 操作员: 生产计划：生产记录、车型、数量、供应商，以及配件信息等
+    操作员->>+管理员: 录入生产计划
+    管理员-->>-会计: 审批通过
+    Note over 会计: 到款情况：是否已到款、是否足额、到款时间
+    会计->>+管理员: 录入到款情况
+    管理员-->>-操作员: 审批通过
+    Note over 操作员: 下单情况：下单时间、钱、附件等
+    loop 线下生产过程
+        操作员-->操作员: 时间不定，可能几个月
+    end
+    操作员->>会计: 提交下单情况
+    Note over 会计: 到款情况：尾款是否已到账、是否足额、到款时间
+    会计->>+管理员: 录入到款情况
+    管理员-->>-操作员: 审批通过
+    Note over 操作员: 发货信息：提单号、入货通知、发货时间
+    操作员->>操作员: 准备发货
+    Note over 操作员: 海关信息：报关单、提单等、车型车架号、生产人，以及配件等信息
+    操作员->>操作员: 海关发货
+    Note over 操作员: 快递信息：文件寄送单号、快递公司等
+    操作员->>操作员: 快递文件
+    操作员->>会计: 发货完成
+    Note over 会计: 工资计算：按月按人走的订单来统计和计算工资
+    会计->>+管理员: 工资核算
+    管理员-->>-业务员: 审批通过
+    Note over 业务员: 工资查看：查看每月工资，查看明细
+</div>
+<h3 class="mume-header" id="2-&#x4E09;&#x5305;&#x914D;&#x4EF6;&#x53D1;&#x9001;&#x6D41;&#x7A0B;">2、三包配件发送流程</h3>
+
+<div class="mermaid">sequenceDiagram
+    participant 业务员
+    participant 操作员
+    participant 快递公司
+    Note over 业务员: 三包配件信息：PI、车型车架号、售后问题详细、配件名称数量等
+    业务员->>操作员: 新建三包
+    操作员->>操作员: 准备发货
+    操作员->>快递公司: 快递发货
+    快递公司->>操作员: 反馈快递的信息
+    Note over 操作员: 快递信息：文件寄送单号、快递公司等
+    操作员->>操作员: 录入发货信息
+    loop 快递每月一结
+        快递公司-->操作员: 快递公司出个月账单
+        Note over 操作员,快递公司: 出账单：单号、价格、重量、发货时间等
+        操作员->>操作员: 导入出账单
+    end
+    操作员->>业务员: 发货完成
+    Note over 业务员: 发货查看：查看三包信息和发货明细等
+</div>
+<h3 class="mume-header" id="3-&#x914D;&#x4EF6;&#x9500;&#x552E;&#x7BA1;&#x7406;&#x6D41;&#x7A0B;">3、配件销售管理流程</h3>
+
+<p><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="533px" preserveAspectRatio="none" style="width:633px;height:533px;" version="1.1" viewBox="0 0 633 533" width="633px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lkwnm3u720qi" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"></feGaussianBlur><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"></feColorMatrix><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"></feOffset><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"></feBlend></filter></defs><g><ellipse cx="289.5" cy="20" fill="#000000" filter="url(#f1lkwnm3u720qi)" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"></ellipse><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="116" x="231.5" y="50"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="96" x="241.5" y="71.6016">业务员：新建订单</text><polygon fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" points="254,104.1328,325,104.1328,337,116.1328,325,128.1328,254,128.1328,242,116.1328,254,104.1328" style="stroke: #A80036; stroke-width: 1.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="71" x="254" y="120.29">选择发送方式?</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="7" x="235" y="113.8125">1</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="7" x="337" y="113.8125">2</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="44" x="101.5" y="138.1328"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="24" x="111.5" y="159.7344">快递</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="77.5" y="192.2656"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="72" x="87.5" y="213.8672">会计确认收款</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="83.5" y="246.3984"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="93.5" y="268">管理员审批</text><polygon fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" points="85,300.5313,162,300.5313,174,312.5313,162,324.5313,85,324.5313,73,312.5313,85,300.5313" style="stroke: #A80036; stroke-width: 1.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="77" x="85" y="316.6885">是否审批通过？</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="33" x="40" y="310.2109">未通过</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="22" x="174" y="310.2109">通过</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="68" x="10" y="334.5313"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="48" x="20" y="356.1328">流程结束</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="210" x="98" y="334.5313"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="190" x="108" y="356.1328">进入“三包配件发送流程”的快递流程</text><polygon fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" points="123.5,374.6641,135.5,386.6641,123.5,398.6641,111.5,386.6641,123.5,374.6641" style="stroke: #A80036; stroke-width: 1.5;"></polygon><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="44" x="433.5" y="138.1328"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="24" x="443.5" y="159.7344">拼箱</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="92" x="409.5" y="192.2656"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="72" x="419.5" y="213.8672">会计确认收款</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="80" x="415.5" y="246.3984"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="60" x="425.5" y="268">管理员审批</text><polygon fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" points="417,300.5313,494,300.5313,506,312.5313,494,324.5313,417,324.5313,405,312.5313,417,300.5313" style="stroke: #A80036; stroke-width: 1.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="77" x="417" y="316.6885">是否审批通过？</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="33" x="372" y="310.2109">未通过</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="22" x="506" y="310.2109">通过</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="68" x="348" y="334.5313"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="48" x="358" y="356.1328">流程结束</text><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="186" x="436" y="334.5313"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="166" x="446" y="356.1328">进入“销售订单流程”的发货流程</text><polygon fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" points="455.5,374.6641,467.5,386.6641,455.5,398.6641,443.5,386.6641,455.5,374.6641" style="stroke: #A80036; stroke-width: 1.5;"></polygon><polygon fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" points="289.5,404.6641,301.5,416.6641,289.5,428.6641,277.5,416.6641,289.5,404.6641" style="stroke: #A80036; stroke-width: 1.5;"></polygon><rect fill="#FEFECE" filter="url(#f1lkwnm3u720qi)" height="34.1328" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="128" x="225.5" y="448.6641"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="108" x="235.5" y="470.2656">完成订单，存档备查</text><ellipse cx="289.5" cy="512.7969" fill="none" filter="url(#f1lkwnm3u720qi)" rx="10" ry="10" style="stroke: #000000; stroke-width: 1.0;"></ellipse><ellipse cx="290" cy="513.2969" fill="#000000" filter="url(#f1lkwnm3u720qi)" rx="6" ry="6" style="stroke: none; stroke-width: 1.0;"></ellipse><line style="stroke: #A80036; stroke-width: 1.5;" x1="289.5" x2="289.5" y1="30" y2="50"></line><polygon fill="#A80036" points="285.5,40,289.5,50,293.5,40,289.5,44" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="123.5" x2="123.5" y1="172.2656" y2="192.2656"></line><polygon fill="#A80036" points="119.5,182.2656,123.5,192.2656,127.5,182.2656,123.5,186.2656" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="123.5" x2="123.5" y1="226.3984" y2="246.3984"></line><polygon fill="#A80036" points="119.5,236.3984,123.5,246.3984,127.5,236.3984,123.5,240.3984" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="73" x2="44" y1="312.5313" y2="312.5313"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="44" x2="44" y1="312.5313" y2="334.5313"></line><polygon fill="#A80036" points="40,324.5313,44,334.5313,48,324.5313,44,328.5313" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="174" x2="203" y1="312.5313" y2="312.5313"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="203" x2="203" y1="312.5313" y2="334.5313"></line><polygon fill="#A80036" points="199,324.5313,203,334.5313,207,324.5313,203,328.5313" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="44" x2="44" y1="368.6641" y2="386.6641"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="44" x2="111.5" y1="386.6641" y2="386.6641"></line><polygon fill="#A80036" points="101.5,382.6641,111.5,386.6641,101.5,390.6641,105.5,386.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="203" x2="203" y1="368.6641" y2="386.6641"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="203" x2="135.5" y1="386.6641" y2="386.6641"></line><polygon fill="#A80036" points="145.5,382.6641,135.5,386.6641,145.5,390.6641,141.5,386.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="123.5" x2="123.5" y1="280.5313" y2="300.5313"></line><polygon fill="#A80036" points="119.5,290.5313,123.5,300.5313,127.5,290.5313,123.5,294.5313" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="455.5" x2="455.5" y1="172.2656" y2="192.2656"></line><polygon fill="#A80036" points="451.5,182.2656,455.5,192.2656,459.5,182.2656,455.5,186.2656" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="455.5" x2="455.5" y1="226.3984" y2="246.3984"></line><polygon fill="#A80036" points="451.5,236.3984,455.5,246.3984,459.5,236.3984,455.5,240.3984" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="405" x2="382" y1="312.5313" y2="312.5313"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="382" x2="382" y1="312.5313" y2="334.5313"></line><polygon fill="#A80036" points="378,324.5313,382,334.5313,386,324.5313,382,328.5313" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="506" x2="529" y1="312.5313" y2="312.5313"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="529" x2="529" y1="312.5313" y2="334.5313"></line><polygon fill="#A80036" points="525,324.5313,529,334.5313,533,324.5313,529,328.5313" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="382" x2="382" y1="368.6641" y2="386.6641"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="382" x2="443.5" y1="386.6641" y2="386.6641"></line><polygon fill="#A80036" points="433.5,382.6641,443.5,386.6641,433.5,390.6641,437.5,386.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="529" x2="529" y1="368.6641" y2="386.6641"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="529" x2="467.5" y1="386.6641" y2="386.6641"></line><polygon fill="#A80036" points="477.5,382.6641,467.5,386.6641,477.5,390.6641,473.5,386.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="455.5" x2="455.5" y1="280.5313" y2="300.5313"></line><polygon fill="#A80036" points="451.5,290.5313,455.5,300.5313,459.5,290.5313,455.5,294.5313" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="242" x2="123.5" y1="116.1328" y2="116.1328"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="123.5" x2="123.5" y1="116.1328" y2="138.1328"></line><polygon fill="#A80036" points="119.5,128.1328,123.5,138.1328,127.5,128.1328,123.5,132.1328" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="337" x2="455.5" y1="116.1328" y2="116.1328"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="455.5" x2="455.5" y1="116.1328" y2="138.1328"></line><polygon fill="#A80036" points="451.5,128.1328,455.5,138.1328,459.5,128.1328,455.5,132.1328" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="123.5" x2="123.5" y1="398.6641" y2="416.6641"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="123.5" x2="277.5" y1="416.6641" y2="416.6641"></line><polygon fill="#A80036" points="267.5,412.6641,277.5,416.6641,267.5,420.6641,271.5,416.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="455.5" x2="455.5" y1="398.6641" y2="416.6641"></line><line style="stroke: #A80036; stroke-width: 1.5;" x1="455.5" x2="301.5" y1="416.6641" y2="416.6641"></line><polygon fill="#A80036" points="311.5,412.6641,301.5,416.6641,311.5,420.6641,307.5,416.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="289.5" x2="289.5" y1="84.1328" y2="104.1328"></line><polygon fill="#A80036" points="285.5,94.1328,289.5,104.1328,293.5,94.1328,289.5,98.1328" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="289.5" x2="289.5" y1="428.6641" y2="448.6641"></line><polygon fill="#A80036" points="285.5,438.6641,289.5,448.6641,293.5,438.6641,289.5,442.6641" style="stroke: #A80036; stroke-width: 1.0;"></polygon><line style="stroke: #A80036; stroke-width: 1.5;" x1="289.5" x2="289.5" y1="482.7969" y2="502.7969"></line><polygon fill="#A80036" points="285.5,492.7969,289.5,502.7969,293.5,492.7969,289.5,496.7969" style="stroke: #A80036; stroke-width: 1.0;"></polygon><!--
+@startuml
+start
+:业务员：新建订单;
+if (选择发送方式?) then (1)
+  :快递;
+  :会计确认收款;
+  :管理员审批;
+  if(是否审批通过？) then (未通过)
+    :流程结束;
+  else (通过)
+      :进入“三包配件发送流程”的快递流程;
+  endif
+else (2)
+  :拼箱;
+  :会计确认收款;
+  :管理员审批;
+  if(是否审批通过？) then (未通过)
+    :流程结束;
+  else (通过)
+      :进入“销售订单流程”的发货流程;
+  endif
+endif
+:完成订单，存档备查;
+stop
+@enduml
+
+PlantUML version 1.2017.15(Tue Jul 04 00:45:34 CST 2017)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 1.8.0_111-b14
+Operating System: Mac OS X
+OS Version: 10.12.6
+Default Encoding: US-ASCII
+Language: en
+Country: US
+--></g></svg></p>
+<blockquote>
+<p>注意：一个客户下的配件销售PI与整机销售PI可能不是一个，所以数据存档关联采用客户字段关联。</p>
+</blockquote>
+<h2 class="mume-header" id="&#x4E94;-&#x5B50;&#x7CFB;&#x7EDF;">五、子系统</h2>
+
+<h3 class="mume-header" id="1-&#x914D;&#x4EF6;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;">1、配件管理系统</h3>
+
+<ul>
+<li>
+<p>车型管理</p>
+</li>
+<li>
+<p>发动机管理</p>
+<ul>
+<li>选择车型，添加发动机信息</li>
+<li>修改发动机信息</li>
+<li><s>批量导入、导出</s></li>
+</ul>
+</li>
+<li>
+<p>配件管理</p>
+<ul>
+<li>
+<p>添加配件信息，并关联车型，关联发动机</p>
+</li>
+<li>
+<p>修改配件信息</p>
+</li>
+<li>
+<p>批量导入、导出</p>
+</li>
+<li>
+<p>配件高级查询</p>
+<ul>
+<li>模糊搜索、and条件连接、查询列表行可排序等</li>
+<li>查询后的列表可多选，生成配件明细单后，可发起&quot;新建配件销售订单流程&quot;</li>
+</ul>
+</li>
+<li>
+<p>配件查询列表</p>
+<ul>
+<li>配件名称</li>
+<li>英文名称</li>
+<li>适用车型</li>
+<li>适用发动机</li>
+<li>单价</li>
+<li>其他待定...</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="2-&#x5BA2;&#x6237;&#x5173;&#x7CFB;&#x7BA1;&#x7406;&#x7CFB;&#x7EDF;">2、客户关系管理系统</h3>
+
+<ul>
+<li>
+<p>我的客户</p>
+<ul>
+<li>客户信息录入、修改</li>
+<li>即将超出&quot;跟进时间&quot;提醒</li>
+<li><s>已超出&quot;跟进时间&quot;的客户自动转为公共客户</s></li>
+<li>转移我的客户为公共客户</li>
+</ul>
+</li>
+<li>
+<p><s>统计查看客户销售记录</s></p>
+<ul>
+<li><s>整机销售订单记录</s></li>
+<li><s>配件销售订单记录</s></li>
+<li><s>三包记录</s></li>
+</ul>
+</li>
+<li>
+<p>公共客户</p>
+<ul>
+<li>客户信息修改</li>
+<li>跟进客户，转移为我的客户</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>此模块需控制数据权限，即：</p>
+</blockquote>
+<pre class="language-"> 1\. &#x4E1A;&#x52A1;&#x5458;&#x53EA;&#x80FD;&#x770B;&#x5230;&#x81EA;&#x5DF1;&#x7684;&#x5BA2;&#x6237;&#x548C;&#x516C;&#x5171;&#x5BA2;&#x6237;&#x6570;&#x636E;&#xFF0C;&#x4EE5;&#x53CA;&#x8FD9;&#x4E9B;&#x5BA2;&#x6237;&#x7684;&#x62A5;&#x8868;&#x7EDF;&#x8BA1;&#x60C5;&#x51B5;
+ 2\. &#x7BA1;&#x7406;&#x5458;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x548C;&#x62A5;&#x8868;
+</pre>
+<h3 class="mume-header" id="~~3-&#x5927;&#x6570;&#x636E;&#x5206;&#x6790;&#x6A21;&#x5757;~~"><s>3、大数据分析模块</s></h3>
+
+<ul>
+<li><s>客户成交每月总金额，及走势的报表、图表</s></li>
+<li><s>客户成交量中月份分析报表、图表</s></li>
+<li><s>成交数量和金额较大的配件和整机报表、图表</s></li>
+<li><s>成交订单数量和金额较大的业务员分析</s></li>
+<li><s>成交较多的国家或区域分析</s></li>
+<li><s>成交较多的客户（公司）分析</s></li>
+<li><s>某国家成交较多的整机类型和配件分析</s></li>
+<li><s>其他大数据分析需求待定...</s></li>
+</ul>
+<h2 class="mume-header" id="&#x516D;-&#x5B9E;&#x65BD;&#x9636;&#x6BB5;&#x548C;&#x8FD0;&#x7EF4;">六、实施阶段和运维</h2>
+
+<h3 class="mume-header" id="1-&#x5B9E;&#x65BD;&#x9636;&#x6BB5;">1、实施阶段</h3>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left">阶段序号</th>
+<th style="text-align:left">主要任务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox" checked> 1</td>
+<td style="text-align:left">确认需求文档和报价</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 2</td>
+<td style="text-align:left">签订开发合同，付款</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 3</td>
+<td style="text-align:left">确定需求细节，编写详细设计文档</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 4</td>
+<td style="text-align:left">技术选型、框架设计和搭建</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 5</td>
+<td style="text-align:left">开发环境配置、测试环境搭建、编码规范</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 6</td>
+<td style="text-align:left">程序逻辑流程详细设计、数据库详细设计和建库</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 7</td>
+<td style="text-align:left">UI设计和客户确认</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 8</td>
+<td style="text-align:left">付款</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 9</td>
+<td style="text-align:left">开发分工、编码、调试</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 10</td>
+<td style="text-align:left">上线试运营、BUG修复、功能完善</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 11</td>
+<td style="text-align:left">项目代码和文档的交付、项目的验收</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 12</td>
+<td style="text-align:left">付款</td>
+</tr>
+<tr>
+<td style="text-align:left">- <input type="checkbox" class="task-list-item-checkbox"> 13</td>
+<td style="text-align:left">运维，技术支持</td>
+</tr>
+</tbody>
+</table>
+<h3 class="mume-header" id="2-&#x8FD0;&#x7EF4;">2、运维</h3>
+
+<p>免费运维时间：两个月</p>
+<blockquote>
+<p>运维内容包括:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>7*24小时电话服务和现场服务</li>
+<li>故障处理和BUG修复</li>
+<li>部署文档和培训指导</li>
+</ul>
+</blockquote>
+
+      </div>
+      <div class="md-sidebar-toc"><ul>
+<li><a href="#wolf-oms%E8%AE%A2%E5%8D%95%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F-%E9%9C%80%E6%B1%82%E5%92%8C%E6%8A%A5%E4%BB%B7">WOLF OMS订单管理系统-需求和报价</a>
+<ul>
+<li><a href="#%E4%B8%80-%E9%9C%80%E6%B1%82%E6%A6%82%E8%BF%B0">一、需求概述</a></li>
+<li><a href="#%E4%BA%8C-%E7%94%A8%E4%BE%8B%E5%88%86%E6%9E%90">二、用例分析</a></li>
+<li><a href="#%E4%B8%89-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E6%9E%84%E5%88%86%E6%9E%90">三、服务器架构分析</a></li>
+<li><a href="#%E5%9B%9B-%E4%B8%BB%E8%A6%81%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90">四、主要业务流程分析</a>
+<ul>
+<li><a href="#1-%E9%94%80%E5%94%AE%E8%AE%A2%E5%8D%95%E6%B5%81%E7%A8%8B">1、销售订单流程</a></li>
+<li><a href="#2-%E4%B8%89%E5%8C%85%E9%85%8D%E4%BB%B6%E5%8F%91%E9%80%81%E6%B5%81%E7%A8%8B">2、三包配件发送流程</a></li>
+<li><a href="#3-%E9%85%8D%E4%BB%B6%E9%94%80%E5%94%AE%E7%AE%A1%E7%90%86%E6%B5%81%E7%A8%8B">3、配件销售管理流程</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%94-%E5%AD%90%E7%B3%BB%E7%BB%9F">五、子系统</a>
+<ul>
+<li><a href="#1-%E9%85%8D%E4%BB%B6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F">1、配件管理系统</a></li>
+<li><a href="#2-%E5%AE%A2%E6%88%B7%E5%85%B3%E7%B3%BB%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F">2、客户关系管理系统</a></li>
+<li><a href="#~~3-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A8%A1%E5%9D%97~~"><s>3、大数据分析模块</s></a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%AD-%E5%AE%9E%E6%96%BD%E9%98%B6%E6%AE%B5%E5%92%8C%E8%BF%90%E7%BB%B4">六、实施阶段和运维</a>
+<ul>
+<li><a href="#1-%E5%AE%9E%E6%96%BD%E9%98%B6%E6%AE%B5">1、实施阶段</a></li>
+<li><a href="#2-%E8%BF%90%E7%BB%B4">2、运维</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+      <a id="sidebar-toc-btn">≡</a>
+    </body>
+    
+    <script>
+// config mermaid init call
+// http://knsv.github.io/mermaid/#configuration
+//
+// You can edit the 'MERMAID_CONFIG' variable below.
+MERMAID_CONFIG = {
+  startOnLoad:true 
+}
+
+if (window['MERMAID_CONFIG']) {
+  window['MERMAID_CONFIG'].startOnLoad = false
+  window['MERMAID_CONFIG'].cloneCssStyles = false 
+}
+mermaidAPI.initialize(window['MERMAID_CONFIG'] || {})
+
+if (typeof(window['Reveal']) !== 'undefined') {
+  function mermaidRevealHelper(event) {
+    var currentSlide = event.currentSlide
+    var diagrams = currentSlide.querySelectorAll('.mermaid')
+    for (var i = 0; i < diagrams.length; i++) {
+      var diagram = diagrams[i]
+      if (!diagram.hasAttribute('data-processed')) {
+        mermaid.init(null, diagram, ()=> {
+          Reveal.slide(event.indexh, event.indexv)
+        })
+      }
+    }
+  }
+
+  Reveal.addEventListener('slidechanged', mermaidRevealHelper)
+  Reveal.addEventListener('ready', mermaidRevealHelper)
+} else {
+  mermaid.init(null, document.getElementsByClassName('mermaid'))
+}
+</script>
+    
+    <script>
+(function bindTaskListEvent() {
+  var taskListItemCheckboxes = document.body.getElementsByClassName('task-list-item-checkbox')
+  for (var i = 0; i < taskListItemCheckboxes.length; i++) {
+    var checkbox = taskListItemCheckboxes[i]
+    var li = checkbox.parentElement
+    if (li.tagName !== 'LI') li = li.parentElement
+    if (li.tagName === 'LI') {
+      li.classList.add('task-list-item')
+    }
+  }
+}())    
+</script>
+    
+<script>
+
+var sidebarTOCBtn = document.getElementById('sidebar-toc-btn')
+sidebarTOCBtn.addEventListener('click', function(event) {
+  event.stopPropagation()
+  if (document.body.hasAttribute('html-show-sidebar-toc')) {
+    document.body.removeAttribute('html-show-sidebar-toc')
+  } else {
+    document.body.setAttribute('html-show-sidebar-toc', true)
+  }
+})
+</script>
+      
+  </html>

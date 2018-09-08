@@ -1,0 +1,148 @@
+{% extends 'share_layout/blog_layout.html' %}
+{% load blog_tags %}
+
+
+{% block header %}
+    <title>{{ article.title }} | {{ SITE_DESCRIPTION }}</title>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ article.title }}"/>
+
+    <meta property="og:description" content="{{ article.body|custom_markdown|striptags|truncatewords:1 }}"/>
+    <meta property="og:url"
+          content="{{ article.get_full_url }}"/>
+    <meta property="article:published_time" content="{% datetimeformat article.pub_time %}"/>
+    <meta property="article:modified_time" content="{% datetimeformat article.pub_time %}"/>
+    <meta property="article:author" content="{{ article.author.get_full_url }}"/>
+    <meta property="article:section" content="{{ article.category.name }}"/>
+    {% for t in article.tags.all %}
+        <meta property="article:tag" content="{{ t.name }}"/>
+    {% endfor %}
+    <meta property="og:site_name" content="{{ SITE_NAME }}"/>
+
+    <meta name="description" content="{{ article.body|custom_markdown|striptags|truncatewords:1 }}"/>
+    {% if article.tags %}
+        <meta name="keywords" content="{{ article.tags.all|join:"," }}"/>
+    {% else %}
+        <meta name="keywords" content="{{ SITE_KEYWORDS }}"/>
+    {% endif %}
+{% endblock %}
+
+
+{% block content %}
+
+
+       <!-- Page Subtitle -->
+    <div id="subtitle" style="height: 60px!important;">
+        <!-- 960 Container -->
+        <div class="container" style="height: 60px!important;">
+            <div class="sixteen columns" style="height: 60px!important;padding-top: 15px;">
+                    <a href="{% url 'blog:index' %}" style="font-size: 18px!important;margin-top:14px;height: 60px!important;">博客</a>
+                    <a href="" style="font-size: 18px!important;color: rgb(103, 103, 103);"> > {{ article.title }}</a>
+            </div>
+        </div>
+        <!-- End 960 Container -->
+    </div><!-- End Page Subtitle -->
+
+
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Posts Container-->
+        <div class="eleven columns">
+            <div id="blog_post_container">
+
+                {% if page_type and tag_name %}
+                    <header class="archive-header">
+                        <p class="archive-title">{{ page_type }}：<span>{{ tag_name }}</span></p>
+                    </header><!-- .archive-header -->
+                {% endif %}
+
+                {# 文章详情#}
+                {% load_article_detail article False user %}
+
+                <br>
+
+                {# 文章链接和文件#}
+                {% if links_count %}
+                    <div class="widget">
+                        <div class="widget-title"><h3>链接</h3></div>
+                        <div class="widget-categories">
+                            <ul class='xoxo blogroll'>
+                                {% for l in article_links %}
+                                    <li style="list-style: decimal!important;background:white;margin-left: 25px;">
+                                        <a href="{{ l.link }}" target="_blank" title="{{ l.name }}">{{ l.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if files_count %}
+                    <div class="widget">
+                        <div class="widget-title"><h3>附件</h3></div>
+                        <div class="widget-categories">
+                            <ul class='xoxo blogroll'>
+                                {% for l in article_files %}
+                                    <li style="list-style: decimal!important;background:white;margin-left: 25px;">
+                                        <a href="{{ l.file.url }}" target="_blank">{{ l.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                {# 文章导航#}
+                {% if article.type == 'a' %}
+                    {% if next_article or prev_article %}
+                        <nav class="nav-single">
+                            <h3 class="assistive-text">文章导航</h3>
+
+                            {% if next_article %}
+                                <a href="{{ next_article.get_absolute_url }}" class="newer_entires">
+                                    {{ next_article.title }}
+                                </a>
+                            {% endif %}
+
+                            {% if prev_article %}
+                                <a href="{{ prev_article.get_absolute_url }}" class="older_entires">
+                                    {{ prev_article.title }}
+                                </a>
+                            {% endif %}
+
+                        </nav><!-- .nav-single -->
+                    {% endif %}
+                {% endif %}
+
+
+                {#评论板块#}
+                {% if article.comment_status == "o" and OPEN_SITE_COMMENT %}
+                    {% include 'comments/tags/comment_list.html' %}
+
+                    {% include 'comments/tags/post_comment.html' %}
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <!-- Widget Container-->
+        <div class="five columns">
+
+            {% block sidebar %}
+                {% load_sidebar user %}
+            {% endblock %}
+            <!-- Search -->
+
+        </div>
+        <!-- End Widget Container-->
+
+    </div>
+    <!-- End 960 Container -->
+
+{% endblock %}
+
+
+

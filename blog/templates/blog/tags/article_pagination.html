@@ -1,0 +1,14 @@
+<nav id="nav-below" class="navigation" role="navigation">
+{#    <h3 class="assistive-text">文章导航</h3>#}
+    <!-- Navigation -->
+
+    {% if page_obj.has_next  and next_url %}
+        <a href="{{ next_url }}" class="newer_entires">下一页</a>
+    {% endif %}
+
+    {% if page_obj.has_previous and previous_url %}
+        <a href="{{ previous_url }}" class="older_entires">上一页</a>
+    {% endif %}
+
+
+</nav><!-- .navigation -->

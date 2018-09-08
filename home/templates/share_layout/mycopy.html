@@ -1,0 +1,64 @@
+{% load static %}
+{% load compress %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'js/zero_lipboard/css.css' %}">
+        {#    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.css' %}">#}
+        <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.min.css' %}">
+    {% endcompress %}
+    <title>复制组件</title>
+</head>
+<body>
+<pre class="prettyprint linenums prettyprinted" id="p" style="margin-bottom: 80px;">
+</pre>
+
+{% compress js %}
+    <script src="{% static 'js/zero_lipboard/import/jquery.js' %}"></script>
+    <script src="{% static 'js/zero_lipboard/import/jquery.zclip.min.js' %}"></script>
+    <script src="{% static 'js/zero_lipboard/copy.UI.js' %}"></script>
+
+    <script type="text/javascript">
+        var cc = sessionStorage.getItem('clip_code');
+        document.getElementById('p').innerHTML = cc;
+        var copyUI = new CopyUI();
+
+        var code = $('#p').find('li').map(function () {
+            return $(this).text();
+        }).get().join('\n');
+
+        copyUI.init({
+            {#value: 'abc',#}
+            swfPath: '{% static "js/zero_lipboard/import/ZeroClipboard.swf" %}',
+            $parent: $('#p')
+        })
+            .before(function () {
+                console.log('开始复制');
+            })
+            .after(function () {
+                console.log('复制成功了');
+                $('.CopyUIBox').text('复制成功了，3秒后自动关闭');
+                var x = 3;
+                var si = setInterval(function () {
+                    $('.CopyUIBox').text('复制成功了，' + (--x) + '秒后自动关闭');
+                    if (x === 0) {
+                        clearInterval(si);
+                        window.close();
+                    }
+                }, 1000);
+            })
+            .setValue(code);
+
+        {#setTimeout(function(){#}
+        {#    $('.copyBtn').trigger('click');#}
+        setTimeout(function () {
+            window.close();
+        }, 1000 * 20);
+    </script>
+{% endcompress %}
+</body>
+</html>

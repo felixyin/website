@@ -1,0 +1,22 @@
+{% extends 'share_layout/base_layout.html' %}
+
+{% load static %}
+
+
+{% block compress_css %}
+    <link rel="stylesheet" href="{% static 'blog/font/iconfont.css' %}">
+    {% block blog_css %}
+    {% endblock %}
+{% endblock %}
+
+
+{% block compress_js %}
+
+    <script type="text/javascript" src="{% static 'blog/js/nprogress.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/navigation.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/blog.js' %}"></script>
+
+    {% block blog_js %}
+    {% endblock %}
+{% endblock %}
+

@@ -1,0 +1,26 @@
+#!/usr/bin/expect -f
+ 
+set timeout 10
+set password "Ybkk1027"
+
+spawn sudo killall -9 lantern
+send "$password\n"
+send {sudo kill -9 `ps -ef | grep lantern | grep -v grep | awk '{print $2}'`}
+send "$password\n"
+sleep 1
+
+spawn sudo spoof-mac.py randomize wi-fi
+send "$password\n"
+
+sleep 2
+spawn /Applications/Lantern.app/Contents/MacOS/lantern  &
+
+spawn sudo ifconfig en0 up
+sleep 2
+spawn sudo ifconfig en0 up
+
+
+if [fork]!=0 exit
+disconnect
+exit
+

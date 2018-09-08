@@ -1,0 +1,79 @@
+{% extends 'share_layout/blog_layout.html' %}
+{% load blog_tags %}
+{% load cache %}
+{% load static %}
+
+{% block header %}
+    {% if tag_name %}
+        <title>{{ page_type }}:{{ tag_name }} | {{ SITE_DESCRIPTION }}</title>
+        {% comment %}<meta name="description" content="{{ page_type }}:{{ tag_name }}"/>{% endcomment %}
+    {% else %}
+        <title>{{ SITE_NAME }} | {{ SITE_DESCRIPTION }}</title>
+    {% endif %}
+    <meta name="description" content="{{ SITE_SEO_DESCRIPTION }}"/>
+    <meta name="keywords" content="{{ SITE_KEYWORDS }}"/>
+    <meta property="og:type" content="blog"/>
+    <meta property="og:title" content="{{ SITE_NAME }}"/>
+    <meta property="og:description" content="{{ SITE_DESCRIPTION }}"/>
+    <meta property="og:url" content="{{ SITE_BASE_URL }}"/>
+    <meta property="og:site_name" content="{{ SITE_NAME }}"/>
+{% endblock %}
+
+{% block content %}
+
+
+       <!-- Page Subtitle -->
+    <div id="subtitle" style="height: 60px!important;">
+        <!-- 960 Container -->
+        <div class="container" style="height: 60px!important;">
+            <div class="sixteen columns" style="height: 60px!important;padding-top: 15px;">
+                <a href="{% url 'blog:index' %}" style="font-size: 18px!important;margin-top:14px;height: 60px!important;">博客</a>
+            </div>
+        </div>
+        <!-- End 960 Container -->
+    </div><!-- End Page Subtitle -->
+
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Posts Container-->
+        <div class="eleven columns">
+            <div id="blog_post_container">
+
+                {% if page_type and tag_name %}
+                    <header class="archive-header">
+                        <p class="archive-title">{{ page_type }}：<span>{{ tag_name }}</span></p>
+                    </header><!-- .archive-header -->
+                {% endif %}
+
+                {% for article in article_list %}
+                    {% load_article_detail article True user True %}
+                {% endfor %}
+
+                {% if is_paginated %}
+                    {% load_pagination_info page_obj page_type tag_name %}
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <!-- Widget Container-->
+        <div class="five columns">
+
+            {% block sidebar %}
+                {% load_sidebar user %}
+            {% endblock %}
+            <!-- Search -->
+
+        </div>
+        <!-- End Widget Container-->
+
+    </div>
+    <!-- End 960 Container -->
+
+{% endblock %}
+
+
+

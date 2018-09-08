@@ -1,0 +1,156 @@
+﻿{% extends 'share_layout/base_layout.html' %}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+
+    <!-- Page Subtitle -->
+    <div id="subtitle" style="height: 60px!important;">
+        <!-- 960 Container -->
+        <div class="container" style="height: 60px!important;">
+            <div class="sixteen columns" style="height: 60px!important;padding-top: 15px;">
+                <a href="{% url 'home:project-list' %}" style="font-size: 18px!important;margin-top:14px;height: 60px!important;">案例展示</a>
+                <a href="" style="font-size: 18px!important;color: rgb(103, 103, 103);"> > {{ project.name }}</a>
+            </div>
+        </div>
+        <!-- End 960 Container -->
+    </div><!-- End Page Subtitle -->
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Project Title -->
+        <div class="sixteen columns">
+            <h2>{{ project.name }}</h2>
+            <!-- Navigation (Next/Prev)-->
+            {% if prev_project %}
+                <a href="{{ prev_project.get_absolute_url }}" class="mr-rotato-prev project_navi"
+                   title="{{ prev_project.name }}"></a>
+            {% else %}
+                <a href="#" class="mr-rotato-prev mr-rotato-disabled project_navi"></a>
+            {% endif %}
+            {% if next_project %}
+                <a href="{{ next_project.get_absolute_url }}" class="mr-rotato-next project_navi"
+                   title="{{ next_project.name }}"></a>
+            {% else %}
+                <a href="#" class="mr-rotato-next mr-rotato-disabled project_navi"></a>
+            {% endif %}
+
+        </div>
+        <!-- End Project Title-->
+
+    </div>
+    <!-- End 960 Container -->
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Posts Container-->
+        <div class="twelve columns">
+            <div id="blog_post_container">
+                <!-- Post-->
+                <div class="post">
+                    <div class="post-content">
+                        {{ project.content|custom_markdown }}
+                        <br/>
+                    </div>
+                </div>
+                <!-- End Post-->
+
+            </div><!-- End Posts Container-->
+        </div>
+
+        <!-- Widget Container-->
+        <div class="four columns">
+
+            <div class="project_overview">
+                <h3>项目简介</h3>
+                {{ project.description|custom_markdown }}
+            </div>
+
+            <div class="project_overview">
+                <h3>采用技术</h3>
+                <ul class="check_list">
+                    {% for tag in project.tags.all %}
+                        <li>{{ tag.name }}</li>
+                    {% endfor %}
+                </ul>
+                <br/>
+                {% if project.source_url %}
+                    <a href="{{ project.source_url }}" class="button gray">查看源码</a>
+                {% endif %}
+            </div>
+
+            <div id="blog_widget_container">
+
+                {% if project.cycle %}
+                    <!-- Text Widget -->
+                    <div class="widget">
+                        <div class="widget-title"><h3>周期预估</h3></div>
+                        <div class="widget-text">
+                            {{ project.cycle|custom_markdown }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if project.projectattach_set.exists %}
+                    <!-- Categories -->
+                    <div class="widget">
+                        <div class="widget-title"><h3>附件查看</h3></div>
+                        <div class="widget-categories">
+                            <ul>
+                                {% for atta in project.projectattach_set.all %}
+                                    <li><a href="{{ atta.file.url }}" target="_blank">{{ atta.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+        <!-- End Widget Container-->
+
+    </div>
+    <!-- End 960 Container -->
+
+
+    {% if related_projects %}
+        <!-- 960 Container -->
+        <div class="container">
+            <!-- Portfolio Content -->
+            <!-- Related Project -->
+            <div class="sixteen columns">
+                <h3 class="page_headline">类似项目</h3>
+            </div><!-- End Related Project -->
+
+            {% for rp in related_projects %}
+                <!-- 1/4 Column -->
+                <div class="four columns portfolio-item architecture real-estate">
+                    <div class="item-img">
+                        <a href="{{ rp.get_absolute_url }}">
+                            <img src="{{ rp.thumb.url }}" style="width:268px;max-width: 268px;height:178px;max-height:178px;"
+                                 alt=""/>
+                            <div class="overlay link"></div>
+                        </a>
+                    </div>
+                    <div class="portfolio-item-meta">
+                        <h4><a href="#">{{ rp.name }}</a></h4>
+                        {{ rp.description|custom_markdown }}
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- End Portfolio Content -->
+        </div>
+        <!-- End 960 Container -->
+    {% endif %}
+
+{% endblock %}
+
+{% comment %}
+{% block compress_css %}
+    <style type="text/css" rel="stylesheet">
+        #feature-list, #feature-list > ul > li {
+            width: 312px;
+        }
+    </style>
+{% endblock %}{% endcomment %}

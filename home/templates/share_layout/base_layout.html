@@ -1,0 +1,176 @@
+{% load static %}
+{% load cache %}
+{% load compress %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en"> <!--<![endif]-->
+
+<head>
+
+    <!-- Basic Page Needs
+  ================================================== -->
+    {% block header %}
+    {% endblock %}
+    {#    {% block title %}<title>尹彬的空间</title>{% endblock %}#}
+
+    <!-- Mobile Specific
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    {% compress css %}
+        <!-- CSS
+      ================================================== -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/flexslider.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/imagebox.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/shortcodes.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'mdeditor/css/editormd.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+        <!-- Web Fonts
+      ================================================== -->
+        <!--<link href='{% static 'css/google-fonts.css' %}' rel='stylesheet' type='text/css'>-->
+
+        {% block compress_css %}
+        {% endblock %}
+    {% endcompress %}
+
+
+</head>
+<body>
+
+<!-- Primary Page Layout
+================================================== -->
+
+<!-- Header -->
+<div id="header" style="position: fixed; z-index: 1000000; width: 100%;">
+
+    <!-- 960 Container -->
+    <div class="container">
+        <!-- Logo -->
+        <div class="four columns">
+            <div id="logo">
+                <a href="{{ SITE_BASE_URL }}" title="{{ SITE_NAME }}">
+                    <img src="{% static 'images/logo.png' %}" style="padding-top: 18px; height: 40px;" alt=""/>
+                </a>
+            </div>
+        </div>
+
+        <div class="twelve columns">
+            {% include 'share_layout/nav.html' %}
+        </div>
+    </div>
+</div><!-- End Header -->
+{#<div class="copyrights">Collect from <a href="#" title="网页模板">网页模板</a></div>#}
+
+<div class="my-content" style="padding-top: 82px;">
+    {% block content %}{% endblock %}
+</div>
+
+
+<div id="box"></div>
+
+
+{% include 'share_layout/footer.html' %}
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+{% compress js %}
+    <!-- JS ================================================== -->
+    <script type='text/javascript' src="{% static 'js/jquery.min.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/carousel.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/jquery.flexslider.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/shortcodes.js' %}"></script>
+    <script type='text/javascript' src="{% static 'js/imagebox.min.js' %}"></script>
+
+    <!--[if lt IE 9]>
+		<script src="{% static 'js/html5shiv.min.js' %}"></script>
+	<![endif]-->
+
+    <!--[if (gte IE 6)&(lte IE 8)]>
+	  	<script src="{% static 'js/selectivizr-min.js' %}"></script>
+	<![endif]-->
+
+    <!-- Imagebox Build -->
+    <script src="{% static 'js/imagebox.build.js' %}"></script>
+    <script type='text/javascript' src="{% static 'home/js/custom.js' %}"></script>
+
+{% endcompress %}
+
+{% compress js %}
+    <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
+    <script type="text/javascript">
+        {#禁用右键菜单#}
+        document.oncontextmenu = function () {
+            return true;
+        };
+        {#禁用选取#}
+        document.onselectstart = function () {
+            return false;
+        };
+        {#禁用复制#}
+        document.oncopy = function () {
+            return false;
+        };
+    </script>
+    <script src="{% static 'mdeditor/js/lib/marked.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/prettify.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/raphael.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/underscore.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/flowchart.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/jquery.flowchart.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/sequence-diagram.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/mermaid.min.js' %}"></script>
+    <script src="{% static 'mdeditor/js/lib/vega.min.js' %}"></script>
+
+    <script type="text/javascript">
+        $.each($('.markdown-content'), function (idx, ele) {
+            // js 解析markdown
+            editormd.markdownToHTML(ele, {
+                htmlDecode: "css",  // you can filter tags decode
+                emoji: true,
+                taskList: true,
+                tex: false,  // 默认不解析
+                flowChart: true,  // 默认不解析
+                sequenceDiagram: true,  // 默认不解析
+                mermaid: true,// 默认不解析
+                vega: true// 默认不解析
+            });
+        });
+
+        function openwindow(url, name, iWidth, iHeight) {
+            // url 转向网页的地址
+            // name 网页名称，可为空
+            // iWidth 弹出窗口的宽度
+            // iHeight 弹出窗口的高度
+            //window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+            var iTop = (window.screen.height - 30 - iHeight) / 2; //获得窗口的垂直位置;
+            var iLeft = (window.screen.width - 10 - iWidth) / 2; //获得窗口的水平位置;
+            window.open(url, name, 'height=' + iHeight + ',,innerHeight=' + iHeight + ',width=' + iWidth + ',innerWidth=' + iWidth + ',top=' + iTop + ',left=' + iLeft + ',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+        }
+
+        $(function () {
+            $('.prettyprint').after('<div class="hljs-button" data-title="复制">复制</div>');
+
+            $('.hljs-button').click(function () {
+                var text = $(this).prev().html();
+                sessionStorage.setItem('clip_code', text);
+                openwindow('{% url "copy" %}', '复制代码', 800, 400);
+            });
+        });
+
+    </script>
+
+    {% block compress_js %}
+    {% endblock %}
+{% endcompress %}
+
+</body>
+</html>

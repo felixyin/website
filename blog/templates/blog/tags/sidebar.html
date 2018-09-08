@@ -1,0 +1,174 @@
+{% load blog_tags %}
+
+<div id="blog_widget_container">
+
+    <div class="search">
+        <form role="search" method="get" id="searchform" class="searchform" action="/search">
+            <input type="text" id="q" name="q" onblur="if(this.value=='')this.value='全文搜索';"
+                   onfocus="if(this.value=='全文搜索')this.value='';" value="全文搜索" class="text"/>
+        </form>
+    </div>
+
+    {% if extra_sidebars %}
+        {% for sidebar in extra_sidebars %}
+            <div class="widget">
+                <div class="widget-title"><h3>{{ sidebar.name }}</h3></div>
+                <div class="widget-md" style="margin-left: 20px;">
+                    {{ sidebar.content|custom_markdown }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if most_read_articles %}
+        <div class="widget">
+            <div class="widget-title"><h3>浏览排行</h3></div>
+            <div class="widget-categories">
+                <ul>
+                    {% for a in most_read_articles %}
+                        <li>
+                            <a href="{{ a.get_absolute_url }}" title="{{ a.views }} 次浏览">
+                                {{ a.title }} - {{ a.views }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+    {% endif %}
+
+
+    {% if sidebar_categorys %}
+        <div class="widget">
+            <div class="widget-title"><h3>分类目录</h3></div>
+            <div class="widget-categories">
+                <ul>
+                    {% for c in sidebar_categorys %}
+                        <li class="cat-item cat-item-184"><a href={{ c.get_absolute_url }}>{{ c.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if sidebar_comments and  open_site_comment %}
+        <div class="widget">
+            <div class="widget-title"><h3>近期评论</h3></div>
+            <div class="widget-categories">
+                {% comment %}<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1"
+            data-show-title="1" data-show-admin="1" data-avatar-size="30" data-excerpt-length="70"></ul>{% endcomment %}
+                <ul id="recentcomments">
+                    {% for c in sidebar_comments %}
+                        <li class="recentcomments">
+                            <a style="display: inline" href="{{ c.article.get_absolute_url }}#comment-{{ c.pk }}">
+                                {{ c.author.username }}
+                                发表在《{{ c.article.title }}》
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% if recent_articles %}
+        <div class="widget">
+            <div class="widget-title"><h3>近期文章</h3></div>
+            <div class="widget-categories">
+                <ul>
+                    {% for a in  recent_articles %}
+                        <li><a href="{{ a.get_absolute_url }}" title="{{ a.title }}">
+                            {{ a.title }}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if sidabar_links %}
+        <div class="widget">
+            <div class="widget-title"><h3>链接</h3></div>
+            <div class="widget-categories">
+                <ul class='xoxo blogroll'>
+                    {% for l in sidabar_links %}
+                        <li>
+                            <a href="{{ l.link }}" target="_blank" title="{{ l.name }}">{{ l.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+
+    {% if show_google_adsense %}
+        <div id="text-2" class="widget">
+            <div class="widget-title"><h3>Google AdSense</h3></div>
+            {#            <div class="widget-categories">#}
+            <div class="textwidget">
+                {{ google_adsense_codes|safe }}
+            </div>
+            {#            </div>#}
+        </div>
+    {% endif %}
+
+
+    {% if sidebar_tags %}
+        <div class="widget">
+            <div class="widget-title"><h3>标签云</h3></div>
+            <div class="tagcloud">
+                {% for tag,count,size in sidebar_tags %}
+                    <a href="{{ tag.get_absolute_url }}"
+                       class="tag-link-{{ tag.id }} tag-link-position-{{ tag.id }}"
+                       style="font-size: {{ size }}pt;" title="{{ count }}个话题"> {{ tag.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="widget">
+        <div class="widget-title"><h3>开源尝试</h3></div>
+        <div class="widget-categories">
+            <div class="textwidget">
+                <p>
+                    <a href="https://github.com/felixyin" rel="nofollow" target="_blank">
+                        GitHub
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="widget">
+        <div class="widget-title"><h3>后台功能</h3></div>
+        <div class="widget-categories">
+            <ul>
+                <li><a href="{{ SITE_BASE_URL }}/admin/" rel="nofollow" target="_blank">管理站点</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url "account:logout" %}" rel="nofollow">登出({% if user and user.nickname %}
+                        {{ user.nickname }}
+                    {% else %}
+                        {{ user }}
+                    {% endif %})</a>
+                    </li>
+
+                {% else %}
+                    <li><a href="{% url "account:login" %}" rel="nofollow">登录</a>
+                {% endif %}
+                {% if user.is_superuser %}
+                    <li><a href="{% url "blog:refresh" %}" target="_blank">刷新缓存</a></li>
+                    <li><a href="{% url 'owntracks:show_dates' %}" target="_blank">运动轨迹记录</a></li>
+                {% endif %}
+{#                <li><a href="http://gitbook.lylinux.net" target="_blank" rel="nofollow">GitBook</a></li>#}
+            </ul>
+        </div>
+    </div>
+
+    <div id="rocket" class="show" title="点我返回顶部"></div>
+
+</div>

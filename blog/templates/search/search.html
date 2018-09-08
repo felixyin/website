@@ -1,0 +1,92 @@
+{% extends 'share_layout/blog_layout.html' %}
+{% load blog_tags %}
+{% block header %}
+    <title>{{ SITE_NAME }} | {{ SITE_DESCRIPTION }}</title>
+    <meta name="description" content="{{ SITE_SEO_DESCRIPTION }}"/>
+    <meta name="keywords" content="{{ SITE_KEYWORDS }}"/>
+    <meta property="og:type" content="blog"/>
+    <meta property="og:title" content="{{ SITE_NAME }}"/>
+    <meta property="og:description" content="{{ SITE_DESCRIPTION }}"/>
+    <meta property="og:url" content="{{ SITE_BASE_URL }}"/>
+    <meta property="og:site_name" content="{{ SITE_NAME }}"/>
+{% endblock %}
+
+
+{% block content %}
+
+    {% if query %}
+        <div id="subtitle" style="height: 60px!important;">
+            <!-- 960 Container -->
+            <div class="container" style="height: 60px!important;">
+                <div class="sixteen columns" style="height: 60px!important;">
+                    <h4 style="font-size: 18px!important;margin-top:14px;height: 60px!important;">搜索：<span
+                            style="color: red;font-size: 18px!important;">{{ query }}</span></h4>
+                </div>
+            </div>
+            <!-- End 960 Container -->
+        </div><!-- End Page Subtitle -->
+
+    {% endif %}
+
+    <!-- 960 Container -->
+    <div class="container">
+
+        <!-- Posts Container-->
+        <div class="eleven columns">
+            <div id="blog_post_container">
+
+
+                {% if query and page.object_list %}
+                    {% for article in page.object_list %}
+                        {% load_article_detail article.object True user %}
+                    {% endfor %}
+                    {% if page.has_previous or page.has_next %}
+                        <nav id="nav-below" class="navigation" role="navigation">
+                            <h3 class="assistive-text">文章导航</h3>
+                            {% if page.has_previous %}
+                                <div class="nav-previous"><a
+                                        href="?q={{ query }}&amp;page={{ page.previous_page_number }}"><span
+                                        class="meta-nav">&larr;</span> 早期文章</a></div>
+                            {% endif %}
+                            {% if page.has_next %}
+                                <div class="nav-next"><a href="?q={{ query }}&amp;page={{ page.next_page_number }}">较新文章
+                                    <span
+                                            class="meta-nav">→</span></a>
+                                </div>
+                            {% endif %}
+                        </nav><!-- .navigation -->
+
+                    {% endif %}
+                {% else %}
+                    <br>
+                    <br>
+                    <br>
+                    <header class="archive-header">
+                        <h2 class="archive-title text-danger">哎呀，关键字：<span>{{ query }}</span>没有找到结果，<br>要不换个词再试试？</h2>
+                    </header><!-- .archive-header -->
+                {% endif %}
+
+
+            </div>
+        </div>
+
+
+        <!-- Widget Container-->
+        <div class="five columns">
+
+            {% block sidebar %}
+                {% load_sidebar user %}
+            {% endblock %}
+            <!-- Search -->
+
+        </div>
+        <!-- End Widget Container-->
+
+    </div>
+    <!-- End 960 Container -->
+
+{% endblock %}
+
+
+
+

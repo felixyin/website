@@ -1,0 +1,39 @@
+{% load blog_tags %}
+{% load static %}
+<!-- Post-->
+<div id="post-{{ article.pk }} "
+     class="post-{{ article.pk }} type-post status-publish format-standard hentry">
+
+    <h2>
+        {% if  isindex %}
+            <a href="{{ article.get_absolute_url }}" rel="bookmark"><h2>{{ article.title }}</h2></a>
+        {% else %}
+            {{ article.title }}
+        {% endif %}
+    </h2>
+
+    {% load_article_metas article user open_site_comment %}
+
+    {#    <div class="post-thumb">#}
+    {#        <a href="{% static 'images/img_blog_01_large.jpg' %}" rel="imagebox[gallery]"#}
+    {#           title="Through the pages of Tuscany">#}
+    {#            <img src="{% static 'images/img_blog_post_01.jpg' %}" alt=""/>#}
+    {#            <div class="overlay zoom"></div>#}
+    {#        </a>#}
+    {#    </div>#}
+
+    <div class="post-content ">
+        {% if  isindex %}
+            <div class="markdown-content">
+                <textarea style="display: none;">{{ article.body|truncate }}</textarea>
+            </div>
+            <a class="post-entry" href=' {{ article.get_absolute_url }}'>更多...</a>
+        {% else %}
+            <div class="markdown-content">
+                <textarea style="display: none;">{{ article.body }}</textarea>
+            </div>
+
+        {% endif %}
+    </div>
+
+</div>

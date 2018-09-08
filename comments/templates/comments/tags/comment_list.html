@@ -1,0 +1,31 @@
+{% load blog_tags %}
+{% load comments_tags %}
+
+<!-- Comments -->
+<div class="comments-sec" style="margin-top: 50px;">
+    <h3>评论 <span>({{ comment_count }})</span></h3>
+
+    {% if article_comments %}
+        <ol class="commentlist">
+            {% query article_comments parent_comment=None as parent_comments %}
+
+            {% for comment in parent_comments %}
+                {% show_comment_item comment False %}
+
+                {% parse_commenttree article_comments comment as childcomments %}
+
+                {% if childcomments %}
+                    <ol class="childlist">
+                        {% for child in childcomments %}
+                            {% show_comment_item child True %}
+                        {% endfor %}
+                    </ol><!-- .children -->
+                {% endif %}
+
+            {% endfor %}
+
+        </ol>
+    {% endif %}
+
+</div>
+<!-- End Comments -->

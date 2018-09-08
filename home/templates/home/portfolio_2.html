@@ -1,0 +1,97 @@
+﻿{% extends 'share_layout/base_layout.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Page Subtitle -->
+<div id="subtitle">
+
+    <!-- 960 Container -->
+    <div class="container">
+        <div class="sixteen columns">
+            <h3>Portfolio <span>/ 2 Columns</span></h3>
+        </div>
+    </div>
+    <!-- End 960 Container -->
+
+</div><!-- End Page Subtitle -->
+
+<!-- 960 Container -->
+<div class="container">
+
+    <!-- Portfolio Filter -->
+    <div class="sixteen columns">
+
+        <div id="filters">
+            <ul class="option-set" data-option-key="filter">
+                <li><a href="#filter" class="selected" data-option-value="*">All</a></li>
+                <li><a href="#filter" data-option-value=".interior-design">Interior Design</a></li>
+                <li><a href="#filter" data-option-value=".architecture">Architecture</a></li>
+                <li><a href="#filter" data-option-value=".scenery">Scenery</a></li>
+                <li><a href="#filter" data-option-value=".real-estate">Real Estate</a></li>
+            </ul>
+        </div>
+
+    </div><!-- End Portfolio Filter-->
+
+</div>
+<!-- End 960 Container -->
+
+<!-- 960 Container -->
+<div class="container">
+    <!-- Portfolio Content -->
+    <div id="portfolio-wrapper">
+
+        <!-- 1/2 Column -->
+        <div class="eight columns portfolio-item interior-design architecture">
+            <div class="item-img"><a href="{% static 'images/img_single_project_01.jpg' %}" rel="imagebox"
+                                     title="Architecture in Melbourne"><img src="{% static 'images/img_portfolio_2_01.jpg' %}" alt=""/>
+                <div class="overlay zoom"></div>
+            </a></div>
+            <div class="portfolio-item-meta">
+                <h4><a href="{% url 'home:single-project'%}">Architecture in Melbourne</a></h4>
+                <p>Aenean aliquet pulvinar dui, nec tempus lectus posuere quis. Proin dignissim ligula non nibh ornare
+                    tempus. Fusce iaculis diam mattis vestibulum.</p>
+            </div>
+        </div>
+
+        <!-- 1/2 Column -->
+        <div class="eight columns portfolio-item architecture">
+            <div class="item-img 2col"><a href="{% url 'home:single-project'%}"><img src="{% static 'images/img_portfolio_2_02.jpg' %}" alt=""/>
+                <div class="overlay link"></div>
+            </a></div>
+            <div class="portfolio-item-meta">
+                <h4><a href="{% url 'home:single-project'%}">Building / Architecture</a></h4>
+                <p>Suspendisse vel leo nec augue dignissim imperdiet. Etiam bibendum metus quis turpis aliquet ut
+                    vestibulum arcu gravida. Nulla pellentesque sapien.</p>
+            </div>
+        </div>
+
+        <!-- 1/2 Column -->
+        <div class="eight columns portfolio-item interior-design architecture real-estate">
+            <div class="item-img 2col"><a href="{% url 'home:single-project'%}"><img src="{% static 'images/img_portfolio_2_03.jpg' %}" alt=""/>
+                <div class="overlay link"></div>
+            </a></div>
+            <div class="portfolio-item-meta">
+                <h4><a href="{% url 'home:single-project'%}">Architecture in Melbourne</a></h4>
+                <p>Aenean aliquet pulvinar dui, nec tempus lectus posuere quis. Proin dignissim ligula non nibh ornare
+                    tempus. Fusce iaculis diam mattis vestibulum.</p>
+            </div>
+        </div>
+
+        <!-- 1/2 Column -->
+        <div class="eight columns portfolio-item scenery real-estate">
+            <div class="item-img 2col"><a href="{% url 'home:single-project'%}"><img src="{% static 'images/img_portfolio_2_04.jpg' %}" alt=""/>
+                <div class="overlay link"></div>
+            </a></div>
+            <div class="portfolio-item-meta">
+                <h4><a href="{% url 'home:single-project'%}">Mountain Landscape</a></h4>
+                <p>Aenean aliquet pulvinar dui, nec tempus lectus posuere quis. Proin dignissim ligula non nibh ornare
+                    tempus. Fusce iaculis diam mattis vestibulum.</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- End Portfolio Content -->
+</div>
+<!-- End 960 Container -->
+{% endblock %}
