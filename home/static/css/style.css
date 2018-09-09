@@ -1050,6 +1050,7 @@ ul.social li.rss a{background:url(../images/social_icons/rss.png) no-repeat;}
         body,.my-content{overflow-x: hidden!important;}
 		#navigation {float: left; width: 100%;height: 34px;}
 		#navigation select {display: block; width: 30%; float: right!important; margin-right: 8px;}
+		#navigation>h3{display: inline-block;}
         #header>.container>.four{ display: none; }
 		.container{margin-left: 0!important;}
 		#navigation ul {display: none;}

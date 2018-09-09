@@ -12,7 +12,7 @@ $(function () {
     /*	Responsive Menu
     /*----------------------------------------------------*/
     $("<h3 style=\"\n" +
-        "    display: inline-block;\n" +
+        "    display: none;\n" +
         "    margin-top: 0;\n" +
         "    font-size: 25px;\n" +
         "    color: white;\n" +
