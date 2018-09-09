@@ -1,6 +1,4 @@
 from django.contrib import admin
-from import_export import resources
-from import_export.admin import ImportExportModelAdmin
 
 from .models import *
 
@@ -57,14 +55,7 @@ class ProjectAttachInline(admin.TabularInline):
     max_num = 20
 
 
-class ProjectResource(resources.ModelResource):
-    class Meta:
-        model = Project
-        fields = ('name', 'description', 'thumb',)
-
-
-class ProjectAdmin(ImportExportModelAdmin):
-    resource_class = ProjectResource
+class ProjectAdmin(admin.ModelAdmin):
     # formfield_overrides = {
     #     'content': {'widget': MDEditorWidget}
     # }

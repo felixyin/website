@@ -52,7 +52,6 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
         'django.contrib.sites',
         'django.contrib.sitemaps',
         'raven.contrib.django.raven_compat',
-        'import_export',
         'ckeditor',
         'ckeditor_uploader',
         'mdeditor',
