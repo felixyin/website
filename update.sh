@@ -25,17 +25,21 @@ sudo chmod 777 update.sh
 sudo chmod 777 zipimg.sh
 
 
-# 压缩图片 TODO
+# 压缩图片 TODO 暂时不需要在更新后，立即压缩图片
 #zipimg
 
 # 清理静态资源
 rm -rf /root/website/website/collectedstatic
 
 # 收集静态文件，为nginx使用,免输入yes或no，默认yes
-python manage.py collectstatic
+/usr/bin/expect <<-EOF
+spawn python manage.py collectstatic
+send "yes\n"
+expect eof
+EOF
 
 
-# 计算和生成数据库升级脚本
+# 生成数据库升级脚本
 python manage.py makemigrations
 
 
