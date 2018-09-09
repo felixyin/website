@@ -11,7 +11,13 @@ $(function () {
     /*----------------------------------------------------*/
     /*	Responsive Menu
     /*----------------------------------------------------*/
-
+    $("<h3 style=\"\n" +
+        "    display: inline-block;\n" +
+        "    margin-top: 0;\n" +
+        "    font-size: 25px;\n" +
+        "    color: white;\n" +
+        "    font-weight: bold;\n" +
+        "\">尹彬的博客</h3>").appendTo('#navigation');
     // Create the dropdown bases
     $("<select />").appendTo("#navigation");
 
