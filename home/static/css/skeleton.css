@@ -229,7 +229,7 @@
         .container .offset-by-fifteen { padding-left: 0; }
         .header-text p {font-family:黑体; font-size: 18px!important;}
         .my-content{padding-top: 45px!important;}
-        #navigation>h3{display: inline-block;}
+        #navigation>h3{display: inline-block!important;}
     }
 
 
@@ -264,7 +264,7 @@
         .container .two-thirds.column { width: 420px; }
         .header-text p {font-family:黑体; font-size: 14px!important;}
         .my-content{padding-top: 45px!important;}
-        #navigation>h3{display: inline-block;}
+        #navigation>h3{display: inline-block!important;}
     }
 
 
