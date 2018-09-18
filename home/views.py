@@ -47,7 +47,7 @@ class HomeDetailView(DetailView):
     model = Home
 
     def get_context_data(self, **kwargs):
-        kwargs['recent_projects'] = Project.objects.order_by('-begin_time')[:4]
+        kwargs['recent_projects'] = Project.objects.order_by('-sequence')[:4]
         blogs = Article.objects.order_by('-created_time')[:12]
         kwargs['latest_blogs1'] = blogs[0:4]
         kwargs['latest_blogs2'] = blogs[4:8]
