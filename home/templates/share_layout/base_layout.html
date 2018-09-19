@@ -13,6 +13,14 @@
     <!-- Basic Page Needs
   ================================================== -->
     {% block header %}
+        <title>{{ SITE_NAME }}</title>
+        <meta name="description" content="{{ SITE_SEO_DESCRIPTION }}"/>
+        <meta name="keywords" content="{{ SITE_KEYWORDS }}"/>
+        <meta property="og:type" content="blog"/>
+        <meta property="og:title" content="{{ SITE_NAME }}"/>
+        <meta property="og:description" content="{{ SITE_DESCRIPTION }}"/>
+        <meta property="og:url" content="{{ SITE_BASE_URL }}"/>
+        <meta property="og:site_name" content="{{ SITE_NAME }}"/>
     {% endblock %}
     {#    {% block title %}<title>尹彬的空间</title>{% endblock %}#}
 
