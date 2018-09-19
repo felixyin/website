@@ -63,6 +63,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ('name', 'last_mod_time', 'is_enable', 'sequence',)
     inlines = [ProjectAttachInline]
     filter_horizontal = ('tags',)
+    ordering = ('sequence',)
 
 
 class TestimonialsInline(admin.StackedInline):
