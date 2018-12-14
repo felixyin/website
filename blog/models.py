@@ -4,12 +4,15 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 from uuslug import slugify
 
+from home import baidu
 from mdeditor.fields import MDTextField
 from website.utils import cache_decorator, cache
 
@@ -34,7 +37,7 @@ class BaseModel(models.Model):
 
     def get_full_url(self):
         site = Site.objects.get_current().domain
-        url = "https://{site}{path}".format(site=site, path=self.get_absolute_url())
+        url = "http://{site}{path}".format(site=site, path=self.get_absolute_url())
         return url
 
     class Meta:
@@ -327,3 +330,20 @@ class Files(models.Model):
     class Meta:
         verbose_name = '博客附件'
         verbose_name_plural = verbose_name
+
+
+@receiver([post_save], sender=Article)
+@receiver([post_save], sender=Category)
+@receiver([post_save], sender=Tag)
+def save_handler(sender, instance, created, **kwargs):
+    url = instance.get_full_url()
+    bd_type = baidu.EnumBaiDu.create if created else baidu.EnumBaiDu.update
+    baidu.push_url2baidu(url, bd_type)
+
+
+@receiver([post_save], sender=Article)
+@receiver([post_save], sender=Category)
+@receiver([post_save], sender=Tag)
+def delete_handler(sender, instance, **kwargs):
+    url = instance.get_full_url()
+    baidu.push_url2baidu(url, baidu.EnumBaiDu.delete)

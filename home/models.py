@@ -1,13 +1,14 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.sites.models import Site
 from django.db import models as m
-from django.db.models.signals import pre_save, pre_delete, pre_init
+from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 
-from home import baidu
 from blog.models import BaseModel
+from home import baidu
 from mdeditor.fields import MDTextField
 from website.utils import cache_decorator
 
@@ -25,6 +26,11 @@ class HomeBaseModel(m.Model):
     class Meta:
         abstract = True
 
+    def get_full_url(self):
+        site = Site.objects.get_current().domain
+        url = "http://{site}{path}".format(site=site, path=self.get_absolute_url())
+        return url
+
 
 # 主页
 class Home(m.Model):
@@ -38,6 +44,14 @@ class Home(m.Model):
     class Meta:
         verbose_name = '主页'
         verbose_name_plural = verbose_name
+
+    def get_full_url(self):
+        site = Site.objects.get_current().domain
+        url = "http://{site}{path}".format(site=site, path=self.get_absolute_url())
+        return url
+
+    def get_absolute_url(self):
+        return reverse('home:index')
 
 
 # 主页-跑马灯大图
@@ -145,15 +159,6 @@ class Project(HomeBaseModel):
         return Project.objects.all().filter(related_projects=self)
 
 
-@receiver([pre_save, pre_init, pre_delete], sender=Project)
-def pre_save_handler(sender, **kwargs):
-    print('start push_url2baidu ........')
-    url = sender.get_absolute_url()
-    print('url:' + url)
-    result = baidu.push_url2baidu(url)
-    print('result:' + result)
-
-
 # 项目-技术标签
 class ProjectTag(HomeBaseModel):
     name = m.CharField(max_length=50, verbose_name='技术标签名称')
@@ -232,3 +237,18 @@ class TeamMember(HomeBaseModel):
     class Meta:
         verbose_name = '我们的团队'
         verbose_name_plural = verbose_name
+
+
+@receiver([post_save], sender=Project)
+@receiver([post_save], sender=Home)
+def save_handler(sender, instance, created, **kwargs):
+    url = instance.get_full_url()
+    bd_type = baidu.EnumBaiDu.create if created else baidu.EnumBaiDu.update
+    baidu.push_url2baidu(url, bd_type)
+
+
+@receiver([post_delete], sender=Project)
+@receiver([post_delete], sender=Home)
+def delete_handler(sender, instance, **kwargs):
+    url = instance.get_full_url()
+    baidu.push_url2baidu(url, baidu.EnumBaiDu.delete)
