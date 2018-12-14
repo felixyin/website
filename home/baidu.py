@@ -1,6 +1,5 @@
-# !/usr/bin/env python
-#  -*- coding:utf-8 -*-
 import json
+
 import http1
 
 
@@ -14,4 +13,3 @@ if __name__ == '__main__':
     url = 'http://www.yinbin.ink/project/17'
     result = push_url2baidu(url)
     print(result)
-
