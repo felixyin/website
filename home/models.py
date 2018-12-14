@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 
-import baidu
+from home import baidu
 from blog.models import BaseModel
 from mdeditor.fields import MDTextField
 from website.utils import cache_decorator
