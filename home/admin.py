@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from .models import *
 
-
 # 首页跑马灯
 class HomeCarouselInline(admin.StackedInline):
     model = HomeCarousel

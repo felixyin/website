@@ -1,9 +1,12 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models as m
+from django.db.models.signals import pre_save, pre_delete, pre_init
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 
+import baidu
 from blog.models import BaseModel
 from mdeditor.fields import MDTextField
 from website.utils import cache_decorator
@@ -140,6 +143,15 @@ class Project(HomeBaseModel):
     @cache_decorator(60 * 60 * 10)
     def get_related_projects(self):
         return Project.objects.all().filter(related_projects=self)
+
+
+@receiver([pre_save, pre_init, pre_delete], sender=Project)
+def pre_save_handler(sender, **kwargs):
+    print('start push_url2baidu ........')
+    url = sender.get_absolute_url()
+    print('url:' + url)
+    result = baidu.push_url2baidu(url)
+    print('result:' + result)
 
 
 # 项目-技术标签
