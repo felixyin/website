@@ -17,7 +17,7 @@ $(function () {
         "    font-size: 25px;\n" +
         "    color: white;\n" +
         "    font-weight: bold;\n" +
-        "\">尹彬的博客</h3>").appendTo('#navigation');
+        "\">青岛前途软件</h3>").appendTo('#navigation');
     // Create the dropdown bases
     $("<select />").appendTo("#navigation");
 

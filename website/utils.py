@@ -173,7 +173,7 @@ def get_blog_setting():
         from blog.models import BlogSettings
         if not BlogSettings.objects.count():
             setting = BlogSettings()
-            setting.sitename = '尹彬的博客'
+            setting.sitename = '前途软件'
             setting.site_description = '我的技术历程'
             setting.site_seo_description = '我的技术历程'
             setting.site_keywords = '尹彬,软件开发服务'
