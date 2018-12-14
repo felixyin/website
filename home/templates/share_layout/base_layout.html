@@ -115,20 +115,20 @@
 
 {% compress js %}
     <script src="{% static 'mdeditor/js/editormd.min.js' %}"></script>
-    <script type="text/javascript">
+{#    <script type="text/javascript">#}
         {#禁用右键菜单#}
-        document.oncontextmenu = function () {
-            return true;
-        };
+{#        document.oncontextmenu = function () {#}
+{#            return true;#}
+{#        };#}
         {#禁用选取#}
-        document.onselectstart = function () {
-            return false;
-        };
+{#        document.onselectstart = function () {#}
+{#            return false;#}
+{#        };#}
         {#禁用复制#}
-        document.oncopy = function () {
-            return false;
-        };
-    </script>
+{#        document.oncopy = function () {#}
+{#            return false;#}
+{#        };#}
+{#    </script>#}
     <script src="{% static 'mdeditor/js/lib/marked.min.js' %}"></script>
     <script src="{% static 'mdeditor/js/lib/prettify.min.js' %}"></script>
     <script src="{% static 'mdeditor/js/lib/raphael.min.js' %}"></script>
