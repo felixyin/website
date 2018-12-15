@@ -5,7 +5,8 @@ from django.conf import settings
 from website.utils import cache, send_email, expire_view_cache
 from website.spider_notify import SpiderNotify
 from django.contrib.sites.models import Site
-
+from blog.models import Article, Category, Tag
+from home.models import Home,Project
 import logging
 
 logger = logging.getLogger(__name__)
@@ -21,17 +22,22 @@ def article_save_callback(sender, **kwargs):
     is_update_views = kwargs['is_update_views']
     type = sender.__name__
     obj = None
-    from blog.models import Article, Category, Tag
     if type == 'Article':
         obj = Article.objects.get(id=id)
     elif type == 'Category':
         obj = Category.objects.get(id=id)
     elif type == 'Tag':
         obj = Tag.objects.get(id=id)
+    elif type == 'Home':
+        obj = Home.objects.get(1)
+    elif type == 'Project':
+        obj = Project.objects.get(id=id)
     if obj is not None:
         if not settings.TESTING and not is_update_views:
             try:
                 notify_url = obj.get_full_url()
+                print('url:------------------------------------------>')
+                print(notify_url)
                 SpiderNotify.baidu_notify([notify_url])
             except Exception as ex:
                 logger.error("notify sipder", ex)

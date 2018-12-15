@@ -332,18 +332,18 @@ class Files(models.Model):
         verbose_name_plural = verbose_name
 
 
-@receiver([post_save], sender=Article)
-@receiver([post_save], sender=Category)
-@receiver([post_save], sender=Tag)
-def save_handler(sender, instance, created, **kwargs):
-    url = instance.get_full_url()
-    bd_type = baidu.EnumBaiDu.create if created else baidu.EnumBaiDu.update
-    baidu.push_url2baidu(url, bd_type)
-
-
-@receiver([post_save], sender=Article)
-@receiver([post_save], sender=Category)
-@receiver([post_save], sender=Tag)
-def delete_handler(sender, instance, **kwargs):
-    url = instance.get_full_url()
-    baidu.push_url2baidu(url, baidu.EnumBaiDu.delete)
+# @receiver([post_save], sender=Article)
+# @receiver([post_save], sender=Category)
+# @receiver([post_save], sender=Tag)
+# def save_handler(sender, instance, created, **kwargs):
+#     url = instance.get_full_url()
+#     bd_type = baidu.EnumBaiDu.create if created else baidu.EnumBaiDu.update
+#     baidu.push_url2baidu(url, bd_type)
+#
+#
+# @receiver([post_save], sender=Article)
+# @receiver([post_save], sender=Category)
+# @receiver([post_save], sender=Tag)
+# def delete_handler(sender, instance, **kwargs):
+#     url = instance.get_full_url()
+#     baidu.push_url2baidu(url, baidu.EnumBaiDu.delete)

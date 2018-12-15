@@ -205,7 +205,7 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
     }
 
     SITE_ID = 1
-    BAIDU_NOTIFY_URL = "http://data.zz.baidu.com/urls?site=https://www.lylinux.net&token=1uAOGrMsUm5syDGn"
+    BAIDU_NOTIFY_URL = "http://data.zz.baidu.com/urls?site=www.yinbin.ink&token=rRK3EjeKMIjMeDgG"
 
     # Emial:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -637,7 +637,7 @@ else:  # 当发布生产服务器采用的配置
     }
 
     SITE_ID = 1
-    BAIDU_NOTIFY_URL = "http://data.zz.baidu.com/urls?site=https://www.lylinux.net&token=1uAOGrMsUm5syDGn"
+    BAIDU_NOTIFY_URL = "http://data.zz.baidu.com/urls?site=www.yinbin.ink&token=rRK3EjeKMIjMeDgG"
 
     # Emial:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

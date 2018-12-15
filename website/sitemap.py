@@ -1,9 +1,34 @@
-
 from django.contrib.sitemaps import Sitemap
-from blog.models import Article, Category, Tag
-from accounts.models import BlogUser
-from django.contrib.sitemaps import GenericSitemap
 from django.urls import reverse
+
+from blog.models import Article, Category, Tag
+from home.models import Project
+
+
+class HomeSiteMap(Sitemap):
+    priority = 0.8
+    changefreq = 'monthly'
+
+    def items(self):
+        return ['home:index']
+
+    def location(self, item):
+        return reverse('home:index')
+
+
+class ProjectSiteMap(Sitemap):
+    priority = 0.9
+    changefreq = 'daily'
+
+    def items(self):
+        # return ['project:index', ]
+        return Project.objects.all()
+
+    def location(self, item):
+        return item.get_full_url()
+
+    def lastmod(self, obj):
+        return obj.last_mod_time
 
 
 class StaticViewSitemap(Sitemap):

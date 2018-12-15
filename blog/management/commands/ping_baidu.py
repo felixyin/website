@@ -29,7 +29,7 @@ class Command(BaseCommand):
                             help='article : all article,tag : all tag,category: all category,all: All of these')
 
     def get_full_url(self, path):
-        url = "https://{site}{path}".format(site=site, path=path)
+        url = "http://{site}{path}".format(site=site, path=path)
         return url
 
     def handle(self, *args, **options):

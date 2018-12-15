@@ -26,6 +26,17 @@ class HomeBaseModel(m.Model):
     class Meta:
         abstract = True
 
+    def save(self, *args, **kwargs):
+        from website.blog_signals import article_save_signal
+        # if not self.slug or self.slug == 'no-slug' or not self.id:
+        #     slug = self.title if 'title' in self.__dict__ else self.name
+        #     self.slug = slugify(slug)
+        super().save(*args, **kwargs)
+        # type = self.__class__.__name__
+        is_update_views = 'update_fields' in kwargs and len(kwargs['update_fields']) == 1 and kwargs['update_fields'][
+            0] == 'views'
+        article_save_signal.send(sender=self.__class__, is_update_views=is_update_views, id=self.id)
+
     def get_full_url(self):
         site = Site.objects.get_current().domain
         url = "http://{site}{path}".format(site=site, path=self.get_absolute_url())
@@ -238,17 +249,17 @@ class TeamMember(HomeBaseModel):
         verbose_name = '我们的团队'
         verbose_name_plural = verbose_name
 
-
-@receiver([post_save], sender=Project)
-@receiver([post_save], sender=Home)
-def save_handler(sender, instance, created, **kwargs):
-    url = instance.get_full_url()
-    bd_type = baidu.EnumBaiDu.create if created else baidu.EnumBaiDu.update
-    baidu.push_url2baidu(url, bd_type)
-
-
-@receiver([post_delete], sender=Project)
-@receiver([post_delete], sender=Home)
-def delete_handler(sender, instance, **kwargs):
-    url = instance.get_full_url()
-    baidu.push_url2baidu(url, baidu.EnumBaiDu.delete)
+#
+# @receiver([post_save], sender=Project)
+# @receiver([post_save], sender=Home)
+# def save_handler(sender, instance, created, **kwargs):
+#     url = instance.get_full_url()
+#     bd_type = baidu.EnumBaiDu.create if created else baidu.EnumBaiDu.update
+#     baidu.push_url2baidu(url, bd_type)
+#
+#
+# @receiver([post_delete], sender=Project)
+# @receiver([post_delete], sender=Home)
+# def delete_handler(sender, instance, **kwargs):
+#     url = instance.get_full_url()
+#     baidu.push_url2baidu(url, baidu.EnumBaiDu.delete)

@@ -21,7 +21,8 @@ from django.contrib.sitemaps.views import sitemap
 from home.views import copy
 from website.admin_site import admin_site
 from website.feeds import WebsiteFeed
-from website.sitemap import StaticViewSitemap, ArticleSiteMap, CategorySiteMap, TagSiteMap, UserSiteMap
+from website.sitemap import  *
+from django.views.generic import TemplateView
 
 # import xadmin
 # xadmin.autodiscover()
@@ -30,10 +31,11 @@ from website.sitemap import StaticViewSitemap, ArticleSiteMap, CategorySiteMap, 
 # xversion.register_models()
 
 sitemaps = {
-
-    'blog': ArticleSiteMap,
+    'Home': HomeSiteMap,
+    'Project': ProjectSiteMap,
+    'Blog': ArticleSiteMap,
     'Category': CategorySiteMap,
-    'Tag': TagSiteMap,
+    # 'Tag': TagSiteMap,
     'User': UserSiteMap,
     'static': StaticViewSitemap
 }
@@ -68,7 +70,8 @@ urlpatterns = [
     url(r'^search', include('haystack.urls'), name='search'),
     # 代码的复制模块
     url(r'^copy', copy, name='copy'),
-
+    # SEO 优化
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
     url(r'^feed/$', WebsiteFeed()),

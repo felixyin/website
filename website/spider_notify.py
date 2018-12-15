@@ -10,6 +10,7 @@ class SpiderNotify():
         try:
             data = '\n'.join(urls)
             result = requests.post(settings.BAIDU_NOTIFY_URL, data=data)
+            print('result:------------------------------------------>')
             print(result.text)
         except Exception as e:
             print(e)
