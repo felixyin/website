@@ -302,8 +302,8 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
         # other
         'compressor.finders.CompressorFinder',
     )
-    COMPRESS_ENABLED = False
-    # COMPRESS_ENABLED = True
+    # COMPRESS_ENABLED = False
+    COMPRESS_ENABLED = True
     # COMPRESS_OFFLINE = True
 
     COMPRESS_CSS_FILTERS = [

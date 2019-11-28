@@ -34,16 +34,16 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/flexslider.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/imagebox.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/shortcodes.css' %}">
+{#        <link rel="stylesheet" type="text/css" href="{% static 'css/imagebox.css' %}">#}
+{#        <link rel="stylesheet" type="text/css" href="{% static 'css/shortcodes.css' %}">#}
         <link rel="stylesheet" type="text/css" href="{% static 'mdeditor/css/editormd.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+{#        <link rel="stylesheet" type="text/css" href="{% static 'mdeditor/css/editormd.preview.css' %}">#}
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
         <!-- Web Fonts
       ================================================== -->
-        <!--<link href='{% static 'css/google-fonts.css' %}' rel='stylesheet' type='text/css'>-->
+{#        <!--<link href='{% static 'css/google-fonts.css' %}' rel='stylesheet' type='text/css'>-->#}
 
         {% block compress_css %}
         {% endblock %}
@@ -94,21 +94,21 @@
 {% compress js %}
     <!-- JS ================================================== -->
     <script type='text/javascript' src="{% static 'js/jquery.min.js' %}"></script>
-    <script type='text/javascript' src="{% static 'js/carousel.js' %}"></script>
+{#    <script type='text/javascript' src="{% static 'js/carousel.js' %}"></script>#}
     <script type='text/javascript' src="{% static 'js/jquery.flexslider.js' %}"></script>
-    <script type='text/javascript' src="{% static 'js/shortcodes.js' %}"></script>
-    <script type='text/javascript' src="{% static 'js/imagebox.min.js' %}"></script>
+{#    <script type='text/javascript' src="{% static 'js/shortcodes.js' %}"></script>#}
+{#    <script type='text/javascript' src="{% static 'js/imagebox.min.js' %}"></script>#}
 
     <!--[if lt IE 9]>
-		<script src="{% static 'js/html5shiv.min.js' %}"></script>
+{#		<script src="{% static 'js/html5shiv.min.js' %}"></script>#}
 	<![endif]-->
 
     <!--[if (gte IE 6)&(lte IE 8)]>
-	  	<script src="{% static 'js/selectivizr-min.js' %}"></script>
+{#	  	<script src="{% static 'js/selectivizr-min.js' %}"></script>#}
 	<![endif]-->
 
     <!-- Imagebox Build -->
-    <script src="{% static 'js/imagebox.build.js' %}"></script>
+{#    <script src="{% static 'js/imagebox.build.js' %}"></script>#}
     <script type='text/javascript' src="{% static 'home/js/custom.js' %}"></script>
 
 {% endcompress %}
@@ -149,15 +149,16 @@
 {#            return false;#}
 {#        };#}
 {#    </script>#}
+
     <script src="{% static 'mdeditor/js/lib/marked.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/prettify.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/raphael.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/underscore.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/flowchart.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/jquery.flowchart.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/sequence-diagram.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/mermaid.min.js' %}"></script>
-    <script src="{% static 'mdeditor/js/lib/vega.min.js' %}"></script>
+{#    <script src="{% static 'mdeditor/js/lib/prettify.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/raphael.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/underscore.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/flowchart.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/jquery.flowchart.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/sequence-diagram.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/mermaid.min.js' %}"></script>#}
+{#    <script src="{% static 'mdeditor/js/lib/vega.min.js' %}"></script>#}
 
     <script type="text/javascript">
         $.each($('.markdown-content'), function (idx, ele) {
