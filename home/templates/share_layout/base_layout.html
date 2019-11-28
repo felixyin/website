@@ -29,9 +29,10 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/flexslider.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'mdeditor/css/editormd.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    {% endcompress %}
-    {% block compress_css %}
+            {% block compress_css %}
     {% endblock %}
+    {% endcompress %}
+
 
 </head>
 <body>
@@ -137,10 +138,10 @@
             });
         });
     </script>
-{% endcompress %}
 
 {% block compress_js %}
 {% endblock %}
+{% endcompress %}
 
 </body>
 </html>

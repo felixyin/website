@@ -302,8 +302,8 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
         # other
         'compressor.finders.CompressorFinder',
     )
-    # COMPRESS_ENABLED = False
-    COMPRESS_ENABLED = True
+    COMPRESS_ENABLED = False
+    # COMPRESS_ENABLED = True
     # COMPRESS_OFFLINE = True
 
     COMPRESS_CSS_FILTERS = [
@@ -462,8 +462,8 @@ else:  # 当发布生产服务器采用的配置
     SECRET_KEY = 'n9ceqv38)#&mwuat@(mjb_p%em$e8$qyr#xw9ot!=ba6lijx-6'
 
     # SECURITY WARNING: don't run with debug turned on in production!
+    # DEBUG = True
     DEBUG = False
-    # DEBUG = False
     TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
     # ALLOWED_HOSTS = []
