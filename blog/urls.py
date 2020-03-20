@@ -1,4 +1,3 @@
-
 from django.urls import path
 from django.views.decorators.cache import cache_page
 from . import views
@@ -28,8 +27,5 @@ urlpatterns = [
     path('archives.html', views.ArchivesView.as_view(), name='archives'),
     path(r'upload', views.fileupload, name='upload'),
     path(r'refresh', views.refresh_memcache, name='refresh'),
-
-
-
 
 ]

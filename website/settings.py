@@ -14,8 +14,12 @@ import os
 import platform
 import sys
 
+from django.conf.global_settings import STATICFILES_DIRS
+
 p = platform.platform()
-if operator.contains(p, 'Darwin'):  # 当我开发时的配置
+# print(p)
+if operator.contains(p, 'macOS'):  # 当我开发时的配置
+    # print("启用本地开发环境配置---------------------")
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # 源码方式安装第三方模块
@@ -41,6 +45,7 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
     SITE_ROOT = os.path.abspath(os.path.join(SITE_ROOT, '../'))
 
     INSTALLED_APPS = [
+        "tests",
         'suit',
         # 'grappelli',
         'django.contrib.admin',
@@ -110,18 +115,23 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'website',
+            'NAME': 'qdqtrj',
             'USER': 'root',
-            'PASSWORD': 'Xr2017.',
-            'HOST': '139.224.1.36',
+            'PASSWORD': 'Ybkk1027',
+            'HOST': '127.0.0.1',
             'PORT': 3306,
             'OPTIONS': {'charset': 'utf8mb4'},
         }
     }
 
+    # 账号表
+    AUTH_USER_MODEL = 'accounts.BlogUser'
+    # 允许使用用户名或密码登录
+    AUTHENTICATION_BACKENDS = ['accounts.user_login_backend.EmailOrUsernameModelBackend']
+    # AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
+
     # Password validation
     # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
-
     AUTH_PASSWORD_VALIDATORS = [
         {
             'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -161,12 +171,13 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
     }
     # 自动更新搜索索引
     HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-    # 允许使用用户名或密码登录
-    AUTHENTICATION_BACKENDS = ['accounts.user_login_backend.EmailOrUsernameModelBackend']
 
     STATIC_ROOT = os.path.join(SITE_ROOT, 'collectedstatic')
     STATIC_URL = '/static/'
     STATICFILES = os.path.join(BASE_DIR, 'static')
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'collectedstatic'),
+    # )
 
     # 图片和附件目录
     MEDIA_URL = '/media/'
@@ -174,7 +185,6 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
         os.path.join(BASE_DIR, 'media')
     )
 
-    AUTH_USER_MODEL = 'accounts.BlogUser'
     LOGIN_URL = '/login/'
 
     TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
@@ -346,8 +356,9 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
                         "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
                         "h1", "h2", "h3", "h5", "h6", "|",
                         "list-ul", "list-ol", "hr", "|",
-                        "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime"
-                                                                                                               "emoji",
+                        "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table",
+                        "datetime"
+                        "emoji",
                         "html-entities", "pagebreak", "goto-line", "|",
                         "help", "info",
                         "||", "preview", "watch", "fullscreen"],  # custom edit box toolbar
@@ -449,6 +460,7 @@ if operator.contains(p, 'Darwin'):  # 当我开发时的配置
         }
     }
 else:  # 当发布生产服务器采用的配置
+    # print("启用服务器生产环境配置---------------------")
     # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     # 源码方式安装第三方模块
@@ -462,8 +474,8 @@ else:  # 当发布生产服务器采用的配置
     SECRET_KEY = 'n9ceqv38)#&mwuat@(mjb_p%em$e8$qyr#xw9ot!=ba6lijx-6'
 
     # SECURITY WARNING: don't run with debug turned on in production!
-    # DEBUG = True
     DEBUG = False
+    # DEBUG = False
     TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
     # ALLOWED_HOSTS = []
@@ -542,9 +554,9 @@ else:  # 当发布生产服务器采用的配置
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'website',
+            'NAME': 'qdqtrj',
             'USER': 'root',
-            'PASSWORD': 'Xr2017.',
+            'PASSWORD': 'Ybkk1027',
             'HOST': '127.0.0.1',
             'PORT': 3306,
             'OPTIONS': {'charset': 'utf8mb4'},
@@ -778,8 +790,9 @@ else:  # 当发布生产服务器采用的配置
                         "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
                         "h1", "h2", "h3", "h5", "h6", "|",
                         "list-ul", "list-ol", "hr", "|",
-                        "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime"
-                                                                                                               "emoji",
+                        "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table",
+                        "datetime"
+                        "emoji",
                         "html-entities", "pagebreak", "goto-line", "|",
                         "help", "info",
                         "||", "preview", "watch", "fullscreen"],  # custom edit box toolbar

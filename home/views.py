@@ -42,7 +42,7 @@ class ProjectDetailView(DetailView):
 
 
 # 主页设置
-class HomeDetailView(DetailView):
+class HomeView(DetailView):
     template_name = 'index.html'
     model = Home
 
@@ -52,7 +52,7 @@ class HomeDetailView(DetailView):
         kwargs['latest_blogs1'] = blogs[0:4]
         kwargs['latest_blogs2'] = blogs[4:8]
         kwargs['latest_blogs3'] = blogs[8:12]
-        return super(HomeDetailView, self).get_context_data(**kwargs)
+        return super(HomeView, self).get_context_data(**kwargs)
 
 
 def index(request):

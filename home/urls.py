@@ -21,7 +21,8 @@ from . import views as v
 app_name = 'home'
 
 urlpatterns = [
-    path('', v.HomeDetailView.as_view(), {'pk': 1}, name='index'),
+    path('', v.HomeView.as_view(), {'pk': 1}, name='index'),
+    # path('', v.index,  name='index'),
     path('404/', v.miss_page, name='miss-page'),
     path('about/', v.AboutDetailView.as_view(), {'pk': 1}, name='about'),
     path('project/', v.ProjectListView.as_view(), name='project-list'),

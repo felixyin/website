@@ -143,7 +143,11 @@ class Project(HomeBaseModel):
     begin_time = m.DateTimeField('开始时间', default=now, editable=True)
     end_time = m.DateTimeField('结束时间', default=now, editable=True)
 
-    related_projects = m.ManyToManyField('self', verbose_name="类似项目", blank=True, null=True)
+    related_projects = m.ManyToManyField('self', verbose_name="类似项目", blank=True, null=True,)
+    # related_projects = m.ManyToManyField('self', to="", related_name=None, related_query_name=None,
+    #              limit_choices_to=None, symmetrical=None, through=None,
+    #              through_fields=None, db_constraint=True, db_table=None,
+    #              swappable=True, **kwargs)
 
     def __str__(self):
         return self.name

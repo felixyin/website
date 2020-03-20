@@ -1,6 +1,6 @@
 # MyWebsite
 
-基于`python3.7`和`Django2.0.7`的个人网站+个人博客。   
+基于`python3.8`和`Django2.2.10`的个人网站+个人博客。   
 
 
 ## 主要功能：

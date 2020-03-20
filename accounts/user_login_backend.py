@@ -6,14 +6,17 @@ class EmailOrUsernameModelBackend(object):
     """
     允许使用用户名或邮箱登录
     """
-    def authenticate(self, username=None, password=None):
+
+    def authenticate(self, request, username=None, password=None):
         if '@' in username:
             kwargs = {'email': username}
         else:
             kwargs = {'username': username}
         try:
             user = get_user_model().objects.get(**kwargs)
-            if user.check_password(password):
+            check_password = user.check_password(password)
+            print(check_password)
+            if check_password:
                 return user
         except get_user_model().DoesNotExist:
             return None
