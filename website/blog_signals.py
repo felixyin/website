@@ -12,8 +12,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 comment_save_signal = django.dispatch.Signal(providing_args=["comment_id", "username", "serverport"])
-article_save_signal = django.dispatch.Signal(providing_args=['id', 'is_update_views'])
 user_login_logout_signal = django.dispatch.Signal(providing_args=['id', 'type'])
+article_save_signal = django.dispatch.Signal(providing_args=['id', 'is_update_views'])
 
 
 @receiver(article_save_signal)
